@@ -1,5 +1,7 @@
 package projeto;
 
+import java.util.LinkedList;
+
 class Universidade {
 
     private String _nome;
