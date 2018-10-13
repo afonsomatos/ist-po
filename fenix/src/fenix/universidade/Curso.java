@@ -4,17 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fenix.Aluno;
-import fenix.Funcionario;
 
 public class Curso {
 
 	private int _delegados = 0;
 	private String _nome;
 	
-	private List<Aluno> 		_alunos			= new LinkedList<Aluno>();
-	private List<Funcionario> 	_funcionarios	= new LinkedList<Funcionario>();
-	private List<Docente> 		_docentes		= new LinkedList<Docente>();
-	private List<Disciplina> 	_disciplinas	= new LinkedList<Disciplina>();
+	private List<Aluno> _alunos = new LinkedList<Aluno>();
+	private List<Disciplina> _disciplinas = new LinkedList<Disciplina>();
 
 	private Universidade _universidade;
 	
@@ -25,8 +22,8 @@ public class Curso {
 		universidade.adicionarCurso(this);
 	}
 	
-	void adicionarFuncionario(Funcionario funcionario) {
-		_funcionarios.add(funcionario);
+	public Universidade getUniversidade() {
+		return _universidade;
 	}
 	
 	void adicionarAluno(Aluno aluno) {
@@ -36,10 +33,6 @@ public class Curso {
 	
 	void adicionarDisciplina(Disciplina disciplina) {
 		_disciplinas.add(disciplina);
-	}
-	
-	void adicionarDocente(Docente docente) {
-		_docentes.add(docente);
 	}
 	
 }
