@@ -1,8 +1,8 @@
-package fenix;
+package fenix.universidade;
 
 import java.util.List;
 
-class Universidade {
+public class Universidade {
 
 	private String _nome;
 	private List<Curso> _cursos;
@@ -16,6 +16,7 @@ class Universidade {
 	}
 	
 	void adicionarCurso(Curso curso) {
+		// TODO: Ver unicidade do nome
 		_cursos.add(curso);
 	}
 	

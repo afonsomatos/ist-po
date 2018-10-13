@@ -1,7 +1,10 @@
-package fenix;
+package fenix.universidade;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import fenix.Aluno;
+import fenix.Funcionario;
 
 public class Curso {
 
@@ -18,6 +21,8 @@ public class Curso {
 	Curso(String nome, Universidade universidade) {
 		_nome = nome;
 		_universidade = universidade;
+		
+		universidade.adicionarCurso(this);
 	}
 	
 	void adicionarFuncionario(Funcionario funcionario) {
@@ -25,6 +30,7 @@ public class Curso {
 	}
 	
 	void adicionarAluno(Aluno aluno) {
+		// TODO Verificar se aluno pertence a este curso
 		_alunos.add(aluno);
 	}
 	
