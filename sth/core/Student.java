@@ -37,4 +37,9 @@ public class Student extends Person {
         dis.enrollStudent(this);
     }
 
+    @Override
+    protected String getLabel() {
+        return _isRepresentative ? "DELEGADO" : "ALUNO";
+    }
+
 }

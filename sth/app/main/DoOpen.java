@@ -32,9 +32,7 @@ public class DoOpen extends Command<SchoolManager> {
 
     try {
     	Form form = new Form();
-  	  InputString str = new InputString(form, "Nome");
-
-    	Input<String> filename = _form.addStringInput(Message.openFile());
+  	  Input<String> filename = _form.addStringInput(Message.openFile());
     	_form.parse();
     	_receiver.setSaveFile(filename.value());
     	_receiver.open();

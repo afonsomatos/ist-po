@@ -45,12 +45,16 @@ public class School implements java.io.Serializable {
   
   //FIXME implement other methods
 
+  List<Person> getAllUsers() {
+    return new ArrayList<>(_persons.values());
+  }
+
   Person getPerson(int id) throws NoSuchPersonIdException {
 	  if (!_persons.containsKey(id))
 		  throw new NoSuchPersonIdException(id);
 	  return _persons.get(id);
   }
-  
+
   void addPerson(Person person) {
     _persons.put(person.getId(), person);
   }

@@ -24,9 +24,10 @@ public abstract class Person implements Serializable {
         return _id;
     }
 
+    protected abstract String getLabel();
+
     public String toString() {
-        // TODO
-        return "Teste";
+        return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name);
     }
 
 	void parseContext(String context, School school) throws BadEntryException {

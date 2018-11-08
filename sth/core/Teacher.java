@@ -24,5 +24,11 @@ public class Teacher extends Person {
 
     discipline.addTeacher(this);
   }
+ 
 
+  @Override
+  protected String getLabel() {
+    return "DOCENTE"
+  }
+  
 }

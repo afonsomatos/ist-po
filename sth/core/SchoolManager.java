@@ -108,5 +108,9 @@ public class SchoolManager {
   public void setSaveFile(String filename) {
 	  _saveFile = filename;
   }
-  
+
+  public List<Person> getAllUsers() {
+    return _school.getAllUsers();
+  }
+
 }
