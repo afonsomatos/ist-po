@@ -17,4 +17,5 @@ public interface Message {
   public static String requestProjectName() {
     return "Nome do projecto: ";
   }
+  
 }

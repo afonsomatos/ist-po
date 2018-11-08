@@ -1,11 +1,15 @@
 package sth.core;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
-
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 
 //FIXME import other classes if needed
@@ -17,8 +21,10 @@ public class SchoolManager {
 
   //FIXME add object attributes if needed
 
-  private School _school;
-
+  private School _school = new School();
+  private Person _loggedUser;
+  private String _saveFile;
+  
   //FIXME implement constructors if needed
   
   /**
@@ -38,10 +44,11 @@ public class SchoolManager {
    * Do the login of the user with the given identifier.
 
    * @param id identifier of the user to login
-   * @throws NoSuchPersonIdException if there is no uers with the given identifier
+   * @throws NoSuchPersonIdException if there is no users with the given identifier
    */
   public void login(int id) throws NoSuchPersonIdException {
     //FIXME implement method
+	  _loggedUser = _school.getPerson(id);
   }
 
   /**
@@ -57,7 +64,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserProfessor() {
     //FIXME implement predicate
-    return false;
+    return _loggedUser instanceof Teacher;
   }
 
   /**
@@ -65,7 +72,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserStudent() {
     //FIXME implement predicate
-    return false;
+	  return _loggedUser instanceof Student;
   }
 
   /**
@@ -73,9 +80,33 @@ public class SchoolManager {
    */
   public boolean isLoggedUserRepresentative() {
     //FIXME implement predicate
-    return false;
+    return isLoggedUserStudent() && ((Student) _loggedUser).isRepresentative();
   }
 
-  //FIXME implement other methods (in general, one for each command in sth-app)
+  // FIXME implement other methods (in general, one for each command in sth-app)
+  
+  public void save() throws IOException {
+	 FileOutputStream fout = new FileOutputStream(_saveFile);
+	 ObjectOutputStream obOut = new ObjectOutputStream(fout);
+	 obOut.writeObject(_school);
+	 obOut.flush();
+	 obOut.close();
+  }
+  
+  public void open() throws ClassNotFoundException, FileNotFoundException, IOException {
+	  FileInputStream fin = new FileInputStream(_saveFile);
+	  ObjectInputStream obIn = new ObjectInputStream(fin);
+	  _school = (School) obIn.readObject();
+	  // TODO close never done if readObject throws exception
+	  obIn.close();
+  }
+  
+  public boolean hasSaveFile() {
+	  return _saveFile != null;
+  }
+  
+  public void setSaveFile(String filename) {
+	  _saveFile = filename;
+  }
   
 }

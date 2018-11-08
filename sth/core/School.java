@@ -1,13 +1,15 @@
 package sth.core;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 //FIXME import other classes if needed
 
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * School implementation.
@@ -21,9 +23,16 @@ public class School implements java.io.Serializable {
 
   //FIXME implement constructors if needed
   
- // private static int _nextPersonId = 100000;
+  private Parser _parser;
 
-  private Map<Integer, Person> persons = new HashMap<Integer, Person>();
+ //private static int _nextPersonId = 100000;
+
+  School() {
+    _parser = new Parser(this);
+  }
+
+  private List<Course> _courses = new ArrayList<Course>();
+  private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
   /**
    * @param filename
@@ -31,18 +40,39 @@ public class School implements java.io.Serializable {
    * @throws IOException
    */
   void importFile(String filename) throws IOException, BadEntryException {
-    //FIXME implement text file reader
+    _parser.parseFile(filename);
   }
   
   //FIXME implement other methods
 
-  void addPerson(Person person) {
-    persons.put(person.getId(), person);
+  Person getPerson(int id) throws NoSuchPersonIdException {
+	  if (!_persons.containsKey(id))
+		  throw new NoSuchPersonIdException(id);
+	  return _persons.get(id);
   }
+  
+  void addPerson(Person person) {
+    _persons.put(person.getId(), person);
+  }
+  
+  	Course getCourse(String name) {
+  		for (Course c : _courses)
+  			if (c.getName() == name)
+  				return c;
+  		return null;
+  	}
+  
+  	void addCourse(Course course) {
+  		_courses.add(course);
+  	}
 
-	Course parseCourse(String header) {
-		// TODO
-		return null;
+  	Course parseCourse(String header) {
+  		Course course = getCourse(header);
+  		if (course == null) {
+  			course = new Course(header);
+  			addCourse(course);
+  		}
+  		return course;
 	}
 
 }

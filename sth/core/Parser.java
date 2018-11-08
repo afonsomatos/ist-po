@@ -1,17 +1,13 @@
 package sth.core;
 
-import java.io.IOException;
-import java.io.StreamTokenizer;
-import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.Reader;
-
-import java.util.Collection;
-import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serializable;
 
 import sth.core.exception.BadEntryException;
 
-public class Parser {
+public class Parser implements Serializable {
 
   private School _school;
   private Person _person;
@@ -71,7 +67,7 @@ public class Parser {
     _school.addPerson(_person);
   }
 
-  private void parseContext(String line) {
+  private void parseContext(String line) throws BadEntryException {
     String lineContext = line.substring(2);
 
     _person.parseContext(lineContext, _school);

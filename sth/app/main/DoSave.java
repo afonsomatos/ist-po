@@ -1,6 +1,8 @@
 package sth.app.main;
 
 import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
@@ -25,7 +27,18 @@ public class DoSave extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    //FIXME implement command
+
+    try {
+    	if (!_receiver.hasSaveFile()) {
+    		Input<String> filename = _form.addStringInput(Message.saveAs());
+    		_form.parse();
+    		_receiver.setSaveFile(filename.value());
+    	}
+    	_receiver.save();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
   }
 
 }

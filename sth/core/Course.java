@@ -2,8 +2,9 @@ package sth.core;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Course {
+public class Course implements Serializable {
 
     private String _name;
 
@@ -36,8 +37,8 @@ public class Course {
     }
 
     Discipline parseDiscipline(String header) {
-        // TODO
-        return null;
+        //header=name
+        return new Discipline(header);
     }
 
 }

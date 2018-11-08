@@ -1,8 +1,10 @@
 package sth.core;
 
+import java.io.Serializable;
+
 import sth.core.exception.BadEntryException;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
 
     private Integer _id;
     private String _name;

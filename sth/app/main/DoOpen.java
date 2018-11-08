@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
+import pt.tecnico.po.ui.Form;
 import pt.tecnico.po.ui.Input;
 import sth.core.SchoolManager;
 
@@ -28,8 +29,15 @@ public class DoOpen extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
+
     try {
-      //FIXME implement command
+    	Form form = new Form();
+  	  InputString str = new InputString(form, "Nome");
+
+    	Input<String> filename = _form.addStringInput(Message.openFile());
+    	_form.parse();
+    	_receiver.setSaveFile(filename.value());
+    	_receiver.open();
     } catch (FileNotFoundException fnfe) {
       _display.popup(Message.fileNotFound());
     } catch (ClassNotFoundException | IOException e) {
