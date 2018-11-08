@@ -28,7 +28,7 @@ public class Teacher extends Person {
 
   @Override
   protected String getLabel() {
-    return "DOCENTE"
+    return "DOCENTE";
   }
   
 }

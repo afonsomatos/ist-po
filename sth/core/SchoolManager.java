@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import java.util.List;
+
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
@@ -49,6 +51,10 @@ public class SchoolManager {
   public void login(int id) throws NoSuchPersonIdException {
     //FIXME implement method
 	  _loggedUser = _school.getPerson(id);
+  }
+
+  public Person getLoggedUser(){
+    return _loggedUser;
   }
 
   /**
@@ -113,4 +119,6 @@ public class SchoolManager {
     return _school.getAllUsers();
   }
 
+  // TODO List searchPerson(String name) returns list with persons whose name contains name
+  // TODO void setPhone(int phone) sets loggedUser phone name
 }
