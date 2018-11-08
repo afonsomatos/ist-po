@@ -4,8 +4,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
 
-import java.io.EIOxception;
-import java.io.FileNotFoundOxception;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 //FIXME import other classes if needed
@@ -16,6 +16,8 @@ import java.io.FileNotFoundOxception;
 public class SchoolManager {
 
   //FIXME add object attributes if needed
+
+  private School _school;
 
   //FIXME implement constructors if needed
   
@@ -47,6 +49,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserAdministrative() {
     //FIXME implement predicate
+    return false;
   }
 
   /**
@@ -54,6 +57,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserProfessor() {
     //FIXME implement predicate
+    return false;
   }
 
   /**
@@ -61,6 +65,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserStudent() {
     //FIXME implement predicate
+    return false;
   }
 
   /**
@@ -68,6 +73,7 @@ public class SchoolManager {
    */
   public boolean isLoggedUserRepresentative() {
     //FIXME implement predicate
+    return false;
   }
 
   //FIXME implement other methods (in general, one for each command in sth-app)

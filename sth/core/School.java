@@ -6,6 +6,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * School implementation.
@@ -19,6 +21,10 @@ public class School implements java.io.Serializable {
 
   //FIXME implement constructors if needed
   
+ // private static int _nextPersonId = 100000;
+
+  private Map<Integer, Person> persons = new HashMap<Integer, Person>();
+
   /**
    * @param filename
    * @throws BadEntryException
@@ -29,5 +35,14 @@ public class School implements java.io.Serializable {
   }
   
   //FIXME implement other methods
+
+  void addPerson(Person person) {
+    persons.put(person.getId(), person);
+  }
+
+	Course parseCourse(String header) {
+		// TODO
+		return null;
+	}
 
 }
