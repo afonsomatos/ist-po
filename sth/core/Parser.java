@@ -9,7 +9,11 @@ import sth.core.exception.BadEntryException;
 
 public class Parser implements Serializable {
 
-  private School _school;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private School _school;
   private Person _person;
 
   Parser(School school) {

@@ -8,7 +8,13 @@ import sth.core.exception.BadEntryException;
 
 public class Teacher extends Person {
 
-    Teacher(int id, int phoneNumber, String name) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	Teacher(int id, int phoneNumber, String name) {
         super(id, phoneNumber, name);
     }
 

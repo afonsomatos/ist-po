@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 //FIXME import other classes if needed
 
@@ -46,7 +47,9 @@ public class School implements java.io.Serializable {
   //FIXME implement other methods
 
   List<Person> getAllUsers() {
-    return new ArrayList<>(_persons.values());
+	  List<Person> users = new ArrayList<>(_persons.values());
+	  users.sort((p1, p2) -> p1.getId()- p2.getId());
+	  return users;
   }
 
   Person getPerson(int id) throws NoSuchPersonIdException {
@@ -70,6 +73,14 @@ public class School implements java.io.Serializable {
   		_courses.add(course);
   	}
 
+  	List<Person> searchPerson(String name) {
+  		return _persons.values()
+  				.stream()
+  				.filter(p -> p.getName()
+  				.contains(name))
+  				.collect(Collectors.toList());
+  	}
+  	
   	Course parseCourse(String header) {
   		Course course = getCourse(header);
   		if (course == null) {

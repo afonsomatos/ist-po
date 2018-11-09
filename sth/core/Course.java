@@ -6,7 +6,12 @@ import java.io.Serializable;
 
 public class Course implements Serializable {
 
-    private String _name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String _name;
 
     private List<Discipline> _disciplines   = new ArrayList<Discipline>();
     private List<Student> _students         = new ArrayList<Student>();

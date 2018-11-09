@@ -2,12 +2,17 @@ package sth.core;
 
 public class Employee extends Person {
 
-    Employee(int id, int phoneNumber, String name) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8002337478616583319L;
+
+	Employee(int id, int phoneNumber, String name) {
         super(id, phoneNumber, name);
     }
 
     @Override
-    protected abstract String getLabel() {
+    protected String getLabel() {
     	return "FUNCIONÁRIO";
     }
     

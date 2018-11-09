@@ -6,7 +6,12 @@ import java.io.Serializable;
 
 public class Discipline implements Serializable {
 
-    private String _name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String _name;
     
     //not used?
     //private int _capacity;

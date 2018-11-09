@@ -6,9 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
+import java.util.ArrayList;
 import java.util.List;
 
+import sth.app.exception.NoSuchPersonException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchPersonIdException;
@@ -99,12 +100,18 @@ public class SchoolManager {
 	 obOut.close();
   }
   
-  public void open() throws ClassNotFoundException, FileNotFoundException, IOException {
+  public void open() throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonException {
 	  FileInputStream fin = new FileInputStream(_saveFile);
 	  ObjectInputStream obIn = new ObjectInputStream(fin);
-	  _school = (School) obIn.readObject();
-	  // TODO close never done if readObject throws exception
+	  School school = (School) obIn.readObject();
 	  obIn.close();
+
+	  try {
+		  _loggedUser = school.getPerson(_loggedUser.getId());
+		  _school = school;
+	  } catch (NoSuchPersonIdException e) {
+		  throw new NoSuchPersonException(e.getId());
+	  }
   }
   
   public boolean hasSaveFile() {
@@ -119,6 +126,12 @@ public class SchoolManager {
     return _school.getAllUsers();
   }
 
-  // TODO List searchPerson(String name) returns list with persons whose name contains name
-  // TODO void setPhone(int phone) sets loggedUser phone name
+  public void setPhone(int phone) {
+	_loggedUser.setPhoneNumber(phone);
+  }
+  
+  public List<Person> searchPerson(String name) {
+	  return _school.searchPerson(name);
+  }
+  
 }

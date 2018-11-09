@@ -4,7 +4,11 @@ import sth.core.exception.BadEntryException;
 
 public class Student extends Person {
 
-    private boolean _isRepresentative = false;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean _isRepresentative = false;
     private Course _course;
 
     Student(int id, int phoneNumber, String name, boolean isRepresentative) {

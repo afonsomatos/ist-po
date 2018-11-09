@@ -6,7 +6,11 @@ import sth.core.exception.BadEntryException;
 
 public abstract class Person implements Serializable {
 
-    private Integer _id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer _id;
     private String _name;
     private int _phoneNumber;
 
@@ -16,6 +20,10 @@ public abstract class Person implements Serializable {
         _phoneNumber = phoneNumber;
     }  
 
+    void setPhoneNumber(int phoneNumber) {
+    	_phoneNumber = phoneNumber;
+    }
+    
     public String getName() {
         return _name;
     }
