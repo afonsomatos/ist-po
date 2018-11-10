@@ -1,0 +1,19 @@
+*** tests/A-07-03-M-ok.out	2018-11-05 16:46:51.000000000 +0000
+--- tests/A-07-03-M-ok.outhyp	2018-11-10 16:14:27.781496555 +0000
+***************
+*** 24,30 ****
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Ficheiro sem nome. Guardar ficheiro como: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
+--- 24,30 ----
+  3 - Portal Pessoal
+  4 - Portal do Docente
+  0 - Sair
+! Escolha uma opção: Guardar ficheiro como: Menu principal
+  1 - Abrir
+  2 - Guardar
+  3 - Portal Pessoal
