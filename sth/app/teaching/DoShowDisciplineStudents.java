@@ -6,9 +6,17 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.core.Person;
+<<<<<<< HEAD
 import sth.core.SchoolManager;
 import sth.core.Student;
 import sth.core.exception.NoSuchDisciplineIdException;
+=======
+import sth.core.exception.NoSuchDisciplineIdException;
+
+import sth.app.exception.NoSuchDisciplineException;
+
+import java.util.List;
+>>>>>>> 3aee9ddfc66cb34497a4519677ec7e7cd1d6cd0e
 
 /**
  * 4.4.4. Show course students.
@@ -39,9 +47,8 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		_display.display();
     
     } catch (NoSuchDisciplineIdException e) {
-    	// TODO
+      throw new NoSuchDisciplineException(_discipline.value());
     }
-    
   }
 
 }

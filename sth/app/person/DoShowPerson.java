@@ -23,6 +23,7 @@ public class DoShowPerson extends Command<SchoolManager> {
 
     _display.addLine(_receiver.getLoggedUser().toString());
     _display.display();
+    
   }
 
 }
