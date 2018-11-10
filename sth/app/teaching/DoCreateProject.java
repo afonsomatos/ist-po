@@ -22,7 +22,9 @@ public class DoCreateProject extends sth.app.common.ProjectCommand {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
-    //FIXME implement command
+    
+    _receiver.createProject(_discipline.value(),_project.value());
+    
   }
 
 }
