@@ -30,7 +30,7 @@ public class DoSave extends Command<SchoolManager> {
 
     try {
     	if (!_receiver.hasSaveFile()) {
-    		Input<String> filename = _form.addStringInput(Message.saveAs());
+    		Input<String> filename = _form.addStringInput(Message.newSaveAs());
     		_form.parse();
     		_receiver.setSaveFile(filename.value());
     	}
