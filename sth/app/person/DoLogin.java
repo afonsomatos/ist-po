@@ -3,9 +3,11 @@ package sth.app.person;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
+
 import sth.core.SchoolManager;
-import sth.app.exception.NoSuchPersonException;
 import sth.core.exception.NoSuchPersonIdException;
+
+import sth.app.exception.NoSuchPersonException;
 
 /**
  * 4.2.1. Show person.
@@ -26,12 +28,14 @@ public class DoLogin extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
+   
     _form.parse();
     try {
       _receiver.login(_login.value());
     } catch (NoSuchPersonIdException e) {
       throw new NoSuchPersonException(_login.value());
     }
+  
   }
 
 }

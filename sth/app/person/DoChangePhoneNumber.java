@@ -5,6 +5,7 @@ import pt.tecnico.po.ui.Display;
 import pt.tecnico.po.ui.Input;
 
 import sth.core.SchoolManager;
+
 import sth.app.person.Message;
 
 

@@ -5,14 +5,13 @@ import java.util.Collection;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
+
 import sth.core.Person;
 import sth.core.SchoolManager;
 import sth.core.Student;
 import sth.core.exception.NoSuchDisciplineIdException;
 
 import sth.app.exception.NoSuchDisciplineException;
-
-import java.util.List;
 
 /**
  * 4.4.4. Show course students.
@@ -36,12 +35,13 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
     _form.parse();
     
     try {
-    	Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
-		for(Student student : students)
-			_display.addLine(student.toString());
-
-		_display.display();
+      Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
     
+      for(Student student : students)
+        _display.addLine(student.toString());
+
+  		_display.display();
+      
     } catch (NoSuchDisciplineIdException e) {
       throw new NoSuchDisciplineException(_discipline.value());
     }
