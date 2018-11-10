@@ -1,8 +1,14 @@
 package sth.core;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import sth.app.exception.DuplicateProjectException;
+import sth.app.exception.NoSuchProjectException;
+import sth.core.exception.NoSuchProjectIdException;
 
 public class Discipline implements Serializable, Comparable {
 
@@ -17,8 +23,10 @@ public class Discipline implements Serializable, Comparable {
     //private int _capacity;
 
 	private Course _course;
-    private List<Teacher> teachers = new ArrayList<Teacher>();
-    private List<Student> students = new ArrayList<Student>();
+    private List<Teacher> _teachers = new ArrayList<Teacher>();
+    private List<Student> _students = new ArrayList<Student>();
+    
+    private Set<Project> _projects = new TreeSet<>();
 
     Discipline(String name, Course course) {
         _name = name;
@@ -40,13 +48,28 @@ public class Discipline implements Serializable, Comparable {
     }
     
     void addTeacher(Teacher teacher) {
-        teachers.add(teacher);
+        _teachers.add(teacher);
     }
 
     void enrollStudent(Student student) {
-        students.add(student);
+        _students.add(student);
+    }
+    
+    Project getProject(String name) throws NoSuchProjectIdException {
+    	for (Project p : _projects)
+    		if (p.getName() == name)
+    			return p;
+    	throw new NoSuchProjectIdException(name);
     }
 
+    void createProject(String name) throws DuplicateProjectException {
+    	// check if project exists
+    	for (Project p : _projects)
+    		if (p.getName() == name)
+    			throw new DuplicateProjectException(getName(), name);
+    	_projects.add(new Project(name));
+    }
+    
 	@Override
 	public int compareTo(Object o) {
 		Discipline d = (Discipline) o;

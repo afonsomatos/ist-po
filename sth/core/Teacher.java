@@ -3,7 +3,10 @@ package sth.core;
 import java.util.Set;
 import java.util.TreeSet;
 
+import sth.app.exception.DuplicateProjectException;
+import sth.app.exception.NoSuchDisciplineException;
 import sth.core.exception.BadEntryException;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 public class Teacher extends Person {
 
@@ -18,6 +21,14 @@ public class Teacher extends Person {
         super(id, phoneNumber, name);
     }
 
+	void createProject(String discipline, String projName) throws NoSuchDisciplineIdException, DuplicateProjectException {
+		for (Discipline d : _disciplines)
+			if (d.getName() == discipline) {
+				d.createProject(projName);
+			}
+		throw new NoSuchDisciplineIdException(discipline);
+	}
+	
     @Override
     void parseContext(String lineContext, School school) throws BadEntryException {
     	String components[] =  lineContext.split("\\|");
@@ -44,6 +55,10 @@ public class Teacher extends Person {
 		  for (Discipline d : _disciplines)
 			  header += '\n' + d.show();
 		  return header;
+	  }
+	  
+	  void createProject() {
+		  
 	  }
   
 }

@@ -9,9 +9,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSuchPersonException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
+import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 
 
@@ -91,6 +93,19 @@ public class SchoolManager {
   }
 
   // FIXME implement other methods (in general, one for each command in sth-app)
+  
+  public void showDisciplineStudents(String name) {
+	  
+  }
+  
+  public void closeProject(String name) {
+	  
+  }
+  
+  public void createProject(String discipline, String name) throws DuplicateProjectException, NoSuchDisciplineIdException {
+	  Teacher teacher = (Teacher) _loggedUser;
+	  teacher.createProject(discipline, name);
+  }
   
   public void save() throws IOException {
 	 FileOutputStream fout = new FileOutputStream(_saveFile);
