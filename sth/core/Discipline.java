@@ -24,10 +24,9 @@ public class Discipline implements Serializable, Comparable {
     //private int _capacity;
 
 	private Course _course;
-    private List<Teacher> _teachers = new ArrayList<Teacher>();
     private Set<Student> _students = new TreeSet<Student>();
-    
-    private Set<Project> _projects = new TreeSet<>();
+    private List<Teacher> _teachers = new ArrayList<Teacher>();
+    private List<Project> _projects = new ArrayList<>();
 
     Discipline(String name, Course course) {
         _name = name;
