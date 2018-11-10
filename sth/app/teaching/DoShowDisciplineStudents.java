@@ -6,6 +6,9 @@ import pt.tecnico.po.ui.Input;
 
 import sth.core.SchoolManager;
 import sth.core.Person;
+import sth.core.exception.NoSuchDisciplineIdException;
+
+import sth.app.exception.NoSuchDisciplineException;
 
 import java.util.List;
 
@@ -28,7 +31,10 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     
+    try{
+      
     List<Person> students;
+    
     _form.parse();
     students = _receiver.showDisciplineStudents(_discipline.value());
     
@@ -36,6 +42,11 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
       _display.addLine(student.toString());
 
     _display.display();
+
+    } catch(NoSuchDisciplineIdException nsd) {
+      throw new NoSuchDisciplineException(_discipline.value());
+    }
+
   }
 
 }
