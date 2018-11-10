@@ -2,6 +2,7 @@ package sth.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -24,7 +25,7 @@ public class Discipline implements Serializable, Comparable {
 
 	private Course _course;
     private List<Teacher> _teachers = new ArrayList<Teacher>();
-    private List<Student> _students = new ArrayList<Student>();
+    private Set<Student> _students = new TreeSet<Student>();
     
     private Set<Project> _projects = new TreeSet<>();
 
@@ -34,6 +35,10 @@ public class Discipline implements Serializable, Comparable {
         //_capacity = capacity;
     }
 
+    Collection<Student> getStudents() {
+    	return _students;
+    }
+    
     String getName() {
         return _name;
     }

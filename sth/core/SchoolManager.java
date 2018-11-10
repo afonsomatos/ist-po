@@ -6,8 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSuchPersonException;
@@ -15,6 +16,7 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 
 //FIXME import other classes if needed
@@ -94,12 +96,14 @@ public class SchoolManager {
 
   // FIXME implement other methods (in general, one for each command in sth-app)
   
-  public void showDisciplineStudents(String name) {
-	  
+  public Collection<Student> showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
+	  Teacher teacher  = (Teacher) _loggedUser;
+	  return teacher.getStudentsOfDiscipline(name);
   }
   
-  public void closeProject(String name) {
-	  
+  public void closeProject(String discipline, String name) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
+	  Teacher teacher = (Teacher) _loggedUser;
+	  teacher.getDiscipline(discipline).getProject(name).close();
   }
   
   public void createProject(String discipline, String name) throws DuplicateProjectException, NoSuchDisciplineIdException {
@@ -145,7 +149,7 @@ public class SchoolManager {
 	_loggedUser.setPhoneNumber(phone);
   }
   
-  public List<Person> searchPerson(String name) {
+  public Collection<Person> searchPerson(String name) {
 	  return _school.searchPerson(name);
   }
   

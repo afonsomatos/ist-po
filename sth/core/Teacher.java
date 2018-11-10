@@ -1,12 +1,13 @@
 package sth.core;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
 import sth.app.exception.DuplicateProjectException;
-import sth.app.exception.NoSuchDisciplineException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 public class Teacher extends Person {
 
@@ -20,13 +21,20 @@ public class Teacher extends Person {
 	Teacher(int id, int phoneNumber, String name) {
         super(id, phoneNumber, name);
     }
-
-	void createProject(String discipline, String projName) throws NoSuchDisciplineIdException, DuplicateProjectException {
+	
+	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
 		for (Discipline d : _disciplines)
-			if (d.getName() == discipline) {
-				d.createProject(projName);
-			}
-		throw new NoSuchDisciplineIdException(discipline);
+			if (d.getName() == name)
+				return d;
+		throw new NoSuchDisciplineIdException(name);
+	}
+	
+	void createProject(String discipline, String projName) throws NoSuchDisciplineIdException, DuplicateProjectException {
+		getDiscipline(discipline).createProject(projName);
+	}
+	
+	void closeProject(String discipline, String projName) throws NoSuchDisciplineIdException, NoSuchProjectIdException {
+		getDiscipline(discipline).getProject(projName).close();
 	}
 	
     @Override
@@ -43,6 +51,9 @@ public class Teacher extends Person {
     		_disciplines.add(discipline);
      }
  
+		Collection<Student> getStudentsOfDiscipline(String name) throws NoSuchDisciplineIdException {
+			return getDiscipline(name).getStudents();
+		}
 
 	  @Override
 	  protected String getLabel() {

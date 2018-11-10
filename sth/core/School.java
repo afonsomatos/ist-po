@@ -2,9 +2,12 @@ package sth.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 //FIXME import other classes if needed
@@ -32,7 +35,7 @@ public class School implements java.io.Serializable {
     _parser = new Parser(this);
   }
 
-  private List<Course> _courses = new ArrayList<Course>();
+  private Set<Course> _courses = new TreeSet<Course>();
   private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
   /**
@@ -73,7 +76,7 @@ public class School implements java.io.Serializable {
   		_courses.add(course);
   	}
 
-  	List<Person> searchPerson(String name) {
+  	Collection<Person> searchPerson(String name) {
   		return _persons.values()
   				.stream()
   				.filter(p -> p.getName()

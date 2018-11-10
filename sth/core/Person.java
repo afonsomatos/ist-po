@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import sth.core.exception.BadEntryException;
 
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable, Comparable<Person> {
 
     /**
 	 * 
@@ -34,6 +34,11 @@ public abstract class Person implements Serializable {
 
     protected abstract String getLabel();
 
+    @Override
+    public int compareTo(Person p) {
+    	return getId() - p.getId();
+    }
+    
     public String toString() {
         return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name);
     }

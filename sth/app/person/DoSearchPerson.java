@@ -1,14 +1,11 @@
 package sth.app.person;
 
+import java.util.Collection;
+
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
-import pt.tecnico.po.ui.Display;
-
-import sth.core.SchoolManager;
-import sth.app.person.Message;
 import sth.core.Person;
-
-import java.util.List;
+import sth.core.SchoolManager;
 
 /**
  * 4.2.4. Search person.
@@ -29,10 +26,8 @@ public class DoSearchPerson extends Command<SchoolManager> {
   @Override
   public final void execute() {
 
-    List<Person> users;
-    
     _form.parse();
-    users = _receiver.searchPerson(_name.value());
+    Collection<Person> users = _receiver.searchPerson(_name.value());
     
     for(Person user : users)
       _display.addLine(user.toString());

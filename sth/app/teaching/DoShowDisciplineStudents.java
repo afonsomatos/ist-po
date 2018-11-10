@@ -1,13 +1,14 @@
 package sth.app.teaching;
 
+import java.util.Collection;
+
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
-import sth.core.SchoolManager;
 import sth.core.Person;
-
-import java.util.List;
+import sth.core.SchoolManager;
+import sth.core.Student;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 /**
  * 4.4.4. Show course students.
@@ -28,14 +29,19 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     
-    List<Person> students;
     _form.parse();
-    students = _receiver.showDisciplineStudents(_discipline.value());
     
-    for(Person student : students)
-      _display.addLine(student.toString());
+    try {
+    	Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
+		for(Student student : students)
+			_display.addLine(student.toString());
 
-    _display.display();
+		_display.display();
+    
+    } catch (NoSuchDisciplineIdException e) {
+    	// TODO
+    }
+    
   }
 
 }
