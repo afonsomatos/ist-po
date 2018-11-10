@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 //FIXME import other classes if needed
@@ -35,7 +34,7 @@ public class School implements java.io.Serializable {
     _parser = new Parser(this);
   }
 
-  private Set<Course> _courses = new TreeSet<Course>();
+  private List<Course> _courses = new LinkedList<Course>();
   private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
   /**
