@@ -23,9 +23,10 @@ public class Teacher extends Person {
     }
 	
 	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
-		for (Discipline d : _disciplines)
-			if (d.getName() == name)
+		for (Discipline d : _disciplines) {
+			if (d.getName().equals(name))
 				return d;
+		}
 		throw new NoSuchDisciplineIdException(name);
 	}
 	
@@ -51,9 +52,9 @@ public class Teacher extends Person {
     		_disciplines.add(discipline);
      }
  
-		Collection<Student> getStudentsOfDiscipline(String name) throws NoSuchDisciplineIdException {
-			return getDiscipline(name).getStudents();
-		}
+	Collection<Student> getStudentsOfDiscipline(String name) throws NoSuchDisciplineIdException {
+		return getDiscipline(name).getStudents();
+	}
 
 	  @Override
 	  protected String getLabel() {

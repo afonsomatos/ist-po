@@ -66,7 +66,7 @@ public class School implements java.io.Serializable {
   
   	Course getCourse(String name) {
   		for (Course c : _courses)
-  			if (c.getName() == name)
+  			if (c.getName().equals(name))
   				return c;
   		return null;
   	}

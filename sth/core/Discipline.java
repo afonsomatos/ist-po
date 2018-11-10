@@ -62,7 +62,7 @@ public class Discipline implements Serializable, Comparable {
     
     Project getProject(String name) throws NoSuchProjectIdException {
     	for (Project p : _projects)
-    		if (p.getName() == name)
+    		if (p.getName().equals(name))
     			return p;
     	throw new NoSuchProjectIdException(name);
     }
@@ -70,7 +70,7 @@ public class Discipline implements Serializable, Comparable {
     void createProject(String name) throws DuplicateProjectException {
     	// check if project exists
     	for (Project p : _projects)
-    		if (p.getName() == name)
+    		if (p.getName().equals(name))
     			throw new DuplicateProjectException(getName(), name);
     	_projects.add(new Project(name));
     }

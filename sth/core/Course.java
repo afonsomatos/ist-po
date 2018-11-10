@@ -30,10 +30,6 @@ public class Course implements Serializable {
     }
     */
     
-    void addDiscipline(Discipline discipline) {
-        _disciplines.add(discipline);
-    }
-
     void addStudent(Student student) {
         _students.add(student);
     }
@@ -51,12 +47,13 @@ public class Course implements Serializable {
     }
 
     Discipline parseDiscipline(String header) {
-        for (Discipline d : _disciplines)
-        	if (d.getName() == header)
+        for (Discipline d : _disciplines) {
+        	if (d.getName().equals(header))
         		return d;
-        Discipline d = new Discipline(header, this);
-        _disciplines.add(d);
-        return d;
+        }
+        Discipline x = new Discipline(header, this);
+        _disciplines.add(x);
+        return x;
     }
 
 }
