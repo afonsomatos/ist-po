@@ -1,6 +1,7 @@
 package sth.core;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.io.Serializable;
 
@@ -21,6 +22,14 @@ public class Course implements Serializable {
         _name = name;
     }
 
+    /*
+    List<Discipline> getDisciplines() {
+		return _disciplines.stream()
+				.sorted((d1, d2) -> d1.getName().compareTo(d2.getName()))
+				.collect(Collectors.toList());
+    }
+    */
+    
     void addDiscipline(Discipline discipline) {
         _disciplines.add(discipline);
     }
@@ -42,8 +51,12 @@ public class Course implements Serializable {
     }
 
     Discipline parseDiscipline(String header) {
-        //header=name
-        return new Discipline(header);
+        for (Discipline d : _disciplines)
+        	if (d.getName() == header)
+        		return d;
+        Discipline d = new Discipline(header, this);
+        _disciplines.add(d);
+        return d;
     }
 
 }

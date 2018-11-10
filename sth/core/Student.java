@@ -1,5 +1,8 @@
 package sth.core;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import sth.core.exception.BadEntryException;
 
 public class Student extends Person {
@@ -8,6 +11,7 @@ public class Student extends Person {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Set<Discipline> _disciplines = new TreeSet<Discipline>();
 	private boolean _isRepresentative = false;
     private Course _course;
 
@@ -37,8 +41,8 @@ public class Student extends Person {
         }
 
         Discipline dis = _course.parseDiscipline(components[1]);
-
         dis.enrollStudent(this);
+        _disciplines.add(dis);
     }
 
     @Override
@@ -46,4 +50,12 @@ public class Student extends Person {
         return _isRepresentative ? "DELEGADO" : "ALUNO";
     }
 
+    @Override
+    public String toString() {
+		  String header = super.toString();
+		  for (Discipline d : _disciplines)
+			  header += '\n' + d.show();
+		  return header;
+    }
+    
 }
