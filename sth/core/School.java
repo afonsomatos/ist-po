@@ -80,6 +80,7 @@ public class School implements java.io.Serializable {
   				.stream()
   				.filter(p -> p.getName()
   				.contains(name))
+  				.sorted((a, b) -> a.getName().compareTo(b.getName()))
   				.collect(Collectors.toList());
   	}
   	
