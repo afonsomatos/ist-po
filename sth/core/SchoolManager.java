@@ -13,6 +13,7 @@ import java.util.Set;
 import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSuchPersonException;
 import sth.core.exception.BadEntryException;
+import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
@@ -106,7 +107,7 @@ public class SchoolManager {
 	  teacher.getDiscipline(discipline).getProject(name).close();
   }
   
-  public void createProject(String discipline, String name) throws DuplicateProjectException, NoSuchDisciplineIdException {
+  public void createProject(String discipline, String name) throws DuplicateProjectIdException, NoSuchDisciplineIdException {
 	  Teacher teacher = (Teacher) _loggedUser;
 	  teacher.createProject(discipline, name);
   }

@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import sth.app.exception.DuplicateProjectException;
 import sth.core.exception.BadEntryException;
+import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
 
@@ -30,7 +30,7 @@ public class Teacher extends Person {
 		throw new NoSuchDisciplineIdException(name);
 	}
 	
-	void createProject(String discipline, String projName) throws NoSuchDisciplineIdException, DuplicateProjectException {
+	void createProject(String discipline, String projName) throws NoSuchDisciplineIdException, DuplicateProjectIdException {
 		getDiscipline(discipline).createProject(projName);
 	}
 	

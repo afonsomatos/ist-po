@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import sth.app.exception.DuplicateProjectException;
-import sth.app.exception.NoSuchProjectException;
+import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchProjectIdException;
 
 public class Discipline implements Serializable, Comparable {
@@ -66,11 +65,11 @@ public class Discipline implements Serializable, Comparable {
     	throw new NoSuchProjectIdException(name);
     }
 
-    void createProject(String name) throws DuplicateProjectException {
+    void createProject(String name) throws DuplicateProjectIdException {
     	// check if project exists
     	for (Project p : _projects)
     		if (p.getName().equals(name))
-    			throw new DuplicateProjectException(getName(), name);
+    			throw new DuplicateProjectIdException(name);
     	_projects.add(new Project(name));
     }
     
