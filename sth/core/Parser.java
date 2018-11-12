@@ -13,7 +13,7 @@ public class Parser implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-  private School _school;
+private School _school;
   private Person _person;
 
   Parser(School school) {

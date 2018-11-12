@@ -1,6 +1,6 @@
 package sth.app.person;
 
-import java.util.Iterator;
+import java.util.Collection;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
@@ -28,15 +28,12 @@ public class DoSearchPerson extends Command<SchoolManager> {
   public final void execute() {
 
     _form.parse();
-    Iterator<Person> it = _receiver.searchPerson(_name.value()).iterator();
-
-    while(it.hasNext()){
-      Person user = it.next();
-      _display.addLine(user.toString());
-    }
+    Collection<Person> users = _receiver.searchPerson(_name.value());
     
-    _display.display();
+    for(Person user : users)
+      _display.addLine(user.toString());
 
+    _display.display();
   }
 
 }
