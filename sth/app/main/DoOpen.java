@@ -16,31 +16,31 @@ import sth.core.SchoolManager;
  */
 public class DoOpen extends Command<SchoolManager> {
 
-  //FIXME add input fields if needed
-  
-  /**
-   * @param receiver
-   */
-  public DoOpen(SchoolManager receiver) {
-    super(Label.OPEN, receiver);
-    //FIXME initialize input fields if needed
-  }
+	//FIXME add input fields if needed
+	
+	/**
+	 * @param receiver
+	 */
+	public DoOpen(SchoolManager receiver) {
+		super(Label.OPEN, receiver);
+		//FIXME initialize input fields if needed
+	}
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
+	/** @see pt.tecnico.po.ui.Command#execute() */
+	@Override
+	public final void execute() throws DialogException {
 
-    try {
-    	Form form = new Form();
-  	  Input<String> filename = _form.addStringInput(Message.openFile());
-    	_form.parse();
-    	_receiver.setSaveFile(filename.value());
-    	_receiver.open();
-    } catch (FileNotFoundException fnfe) {
-      _display.popup(Message.fileNotFound());
-    } catch (ClassNotFoundException | IOException e) {
-      e.printStackTrace();
-    }
-  }
+		try {
+			Form form = new Form();
+			Input<String> filename = _form.addStringInput(Message.openFile());
+			_form.parse();
+			_receiver.setSaveFile(filename.value());
+			_receiver.open();
+		} catch (FileNotFoundException fnfe) {
+			_display.popup(Message.fileNotFound());
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
