@@ -1,6 +1,6 @@
 package sth.app.teaching;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
@@ -35,10 +35,12 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
     _form.parse();
     
     try {
-      Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
-    
-      for(Student student : students)
+      Iterator<Student> it = _receiver.showDisciplineStudents(_discipline.value()).iterator();
+      
+      while(it.hasNext()){
+        Student student = it.next();
         _display.addLine(student.toString());
+      }
 
   		_display.display();
       
