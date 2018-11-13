@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//FIXME import other classes if needed
-
 import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 
@@ -22,13 +20,7 @@ public class School implements java.io.Serializable {
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201810051538L;
 
-	//FIXME define object fields (attributes and, possibly, associations)
-
-	//FIXME implement constructors if needed
-	
 	private Parser _parser;
-
-	//private static int _nextPersonId = 100000;
 
 	School() {
 		_parser = new Parser(this);
@@ -45,8 +37,6 @@ public class School implements java.io.Serializable {
 	void importFile(String filename) throws IOException, BadEntryException {
 		_parser.parseFile(filename);
 	}
-	
-	//FIXME implement other methods
 
 	List<Person> getAllUsers() {
 		List<Person> users = new ArrayList<>(_persons.values());

@@ -22,14 +22,6 @@ public class Course implements Serializable {
 		_name = name;
 	}
 
-	/*
-	List<Discipline> getDisciplines() {
-		return _disciplines.stream()
-				.sorted((d1, d2) -> d1.getName().compareTo(d2.getName()))
-				.collect(Collectors.toList());
-	}
-	*/
-	
 	void addStudent(Student student) {
 		_students.add(student);
 	}

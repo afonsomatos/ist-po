@@ -3,7 +3,9 @@ package sth.app.main;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Menu;
 import pt.tecnico.po.ui.ValidityPredicate;
+
 import sth.core.SchoolManager;
+
 import sth.app.student.StudentMenu;
 
 /**

@@ -68,9 +68,5 @@ public class Teacher extends Person {
 				header += '\n' + d.show();
 			return header;
 	}
-		
-	void createProject() {
-			
-	}
 	
 }

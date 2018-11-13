@@ -2,6 +2,7 @@ package sth.app.teaching;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Menu;
+
 import sth.core.SchoolManager;
 
 /** 4.3. Teaching menu. */

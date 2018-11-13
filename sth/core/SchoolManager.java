@@ -12,6 +12,7 @@ import java.util.Set;
 
 import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSuchPersonException;
+
 import sth.core.exception.BadEntryException;
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.ImportFileException;
@@ -20,20 +21,15 @@ import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSuchProjectIdException;
 
 
-//FIXME import other classes if needed
-
 /**
  * The façade class.
  */
 public class SchoolManager {
 
-	//FIXME add object attributes if needed
-
 	private School _school = new School();
 	private Person _loggedUser;
 	private String _saveFile;
 	
-	//FIXME implement constructors if needed
 	
 	/**
 	 * @param datafile
@@ -55,7 +51,6 @@ public class SchoolManager {
 	 * @throws NoSuchPersonIdException if there is no users with the given identifier
 	 */
 	public void login(int id) throws NoSuchPersonIdException {
-		//FIXME implement method
 		_loggedUser = _school.getPerson(id);
 	}
 
@@ -75,7 +70,6 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a professor
 	 */
 	public boolean isLoggedUserProfessor() {
-		//FIXME implement predicate
 		return _loggedUser instanceof Teacher;
 	}
 
@@ -83,7 +77,6 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a student
 	 */
 	public boolean isLoggedUserStudent() {
-		//FIXME implement predicate
 		return _loggedUser instanceof Student;
 	}
 
@@ -91,11 +84,8 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a representative
 	 */
 	public boolean isLoggedUserRepresentative() {
-		//FIXME implement predicate
 		return isLoggedUserStudent() && ((Student) _loggedUser).isRepresentative();
 	}
-
-	// FIXME implement other methods (in general, one for each command in sth-app)
 	
 	public Collection<Student> showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
 		Teacher teacher  = (Teacher) _loggedUser;

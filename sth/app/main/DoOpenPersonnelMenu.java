@@ -2,7 +2,9 @@ package sth.app.main;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Menu;
+
 import sth.core.SchoolManager;
+
 import sth.app.person.PersonnelMenu;
 
 /**

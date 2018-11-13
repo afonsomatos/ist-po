@@ -18,10 +18,6 @@ public class Discipline implements Serializable, Comparable {
 	private static final long serialVersionUID = 1L;
 
 	private String _name;
-	
-	//not used?
-	//private int _capacity;
-
 	private Course _course;
 	private Set<Student> _students = new TreeSet<Student>();
 	private List<Teacher> _teachers = new ArrayList<Teacher>();
@@ -30,7 +26,6 @@ public class Discipline implements Serializable, Comparable {
 	Discipline(String name, Course course) {
 		_name = name;
 		_course = course;
-		//_capacity = capacity;
 	}
 
 	Collection<Student> getStudents() {

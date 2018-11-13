@@ -7,9 +7,8 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Form;
 import pt.tecnico.po.ui.Input;
-import sth.core.SchoolManager;
 
-//FIXME import other classes if needed
+import sth.core.SchoolManager;
 
 /**
  * 4.1.1. Open existing document.
