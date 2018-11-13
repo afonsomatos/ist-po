@@ -16,14 +16,13 @@ import sth.core.SchoolManager;
  */
 public class DoOpen extends Command<SchoolManager> {
 
-	//FIXME add input fields if needed
-	
+	Input<String> _fileName;	
 	/**
 	 * @param receiver
 	 */
 	public DoOpen(SchoolManager receiver) {
 		super(Label.OPEN, receiver);
-		//FIXME initialize input fields if needed
+		_fileName = _form.addStringInput(Message.openFile());
 	}
 
 	/** @see pt.tecnico.po.ui.Command#execute() */
@@ -31,10 +30,8 @@ public class DoOpen extends Command<SchoolManager> {
 	public final void execute() throws DialogException {
 
 		try {
-			Form form = new Form();
-			Input<String> filename = _form.addStringInput(Message.openFile());
 			_form.parse();
-			_receiver.setSaveFile(filename.value());
+			_receiver.setSaveFile(_fileName.value());
 			_receiver.open();
 		} catch (FileNotFoundException fnfe) {
 			_display.popup(Message.fileNotFound());
