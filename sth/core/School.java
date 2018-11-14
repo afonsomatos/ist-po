@@ -20,19 +20,13 @@ public class School implements java.io.Serializable {
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201810051538L;
 
-	/** Parser responsible to parse the import file information */
 	private Parser _parser;
 
-	/** List responsible to store all courses of the school */
 	private List<Course> _courses = new LinkedList<Course>();
 
-	/** Map resonsible to store all studens of the school */
 	private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
 
-	/**
-	 * School constructor. Initializes the parser.
-	 */
 	School() {
 		_parser = new Parser(this);
 	}
@@ -104,7 +98,7 @@ public class School implements java.io.Serializable {
 
 	/**
 	 * @param name name to search in the school
-	 * @return Collection of people whose name contains the given name 
+	 * @return Collection of people whose name contains the given name sorted by name
 	 */
 	Collection<Person> searchPerson(String name) {
 		return _persons.values()
@@ -117,9 +111,9 @@ public class School implements java.io.Serializable {
 	
 	
 	/**
-	 * Checks if the given course exists if it doesn't exist creates it and adds
+	 * Checks if the given course exists. If it doesn't exist creates it and adds
 	 * it to the school.
-
+	 * 
 	 * @param header
 	 * @return the course with the given header
 	 */	
