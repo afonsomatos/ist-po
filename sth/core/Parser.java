@@ -7,19 +7,37 @@ import java.io.Serializable;
 
 import sth.core.exception.BadEntryException;
 
-public class Parser implements Serializable {
 
-	/**
-	 * 
-	 */
+/**
+ * Parser implemenatation
+ */
+public class Parser implements Serializable {
+	/** Serial number for serialization */
 	private static final long serialVersionUID = 1L;
+	
+	/** School where parser will store the information */
 	private School _school;
+
+	/** Last Person parsed */
 	private Person _person;
 
+
+	/**
+	 * Parser constructor.
+
+	 * @param school
+	 */
 	Parser(School school) {
 		_school = school;
 	}
 
+	/**
+	 * Parses the all file line by line
+
+	 * @param fileName
+	 * @throws IOException
+	 * @throws BadEntryException
+	 */
 	void parseFile(String fileName) throws IOException, BadEntryException {
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 			String line;
@@ -29,6 +47,13 @@ public class Parser implements Serializable {
 		}
 	}
 
+	/**
+	 * Parses a line of the file. If the line starts with '#' it's a context of the
+	 * last person parsed. Otherwise it's a new person.
+
+	 * @param line
+	 * @throws BadEntryException  
+	 */
 	private void parseLine(String line) throws BadEntryException {
 		if (line.startsWith("#"))
 			parseContext(line);
@@ -36,6 +61,12 @@ public class Parser implements Serializable {
 			parseHeaderPerson(line);
 	}
 
+	/**
+	 * Parses the information of a new person. 
+
+	 * @param header
+	 * @throws BadEntryException
+	 */
 	private void parseHeaderPerson(String header) throws BadEntryException {
 		String[] components = header.split("\\|");
 		int id;
@@ -71,6 +102,13 @@ public class Parser implements Serializable {
 		_school.addPerson(_person);
 	}
 
+
+	/**
+	 * Parses the context of the last person parsed.
+
+	 * @param line
+	 * @throws BadEntryException
+	 */
 	private void parseContext(String line) throws BadEntryException {
 		String lineContext = line.substring(2);
 

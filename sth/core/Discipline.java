@@ -10,49 +10,94 @@ import java.util.TreeSet;
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchProjectIdException;
 
-public class Discipline implements Serializable, Comparable {
 
-	/**
-	 * 
-	 */
+/**
+ * Discipline Implementation.
+ */
+public class Discipline implements Serializable, Comparable {
+	
+	/** Serial number for serialization */
 	private static final long serialVersionUID = 1L;
 
+	/** Discipline name */
 	private String _name;
+
+	/** Course where the discipline is registered */
 	private Course _course;
+	
+	/** Set of students of the discipline */
 	private Set<Student> _students = new TreeSet<Student>();
+	
+	/** List of students of the discipline */
 	private List<Teacher> _teachers = new ArrayList<Teacher>();
+	
+	/** List of projects of the discipline */
 	private List<Project> _projects = new ArrayList<>();
 
+
+	/**
+	 * Discipline constructor.
+
+	 * @param name
+	 * @param course
+	 */
 	Discipline(String name, Course course) {
 		_name = name;
 		_course = course;
 	}
 
+	/**
+	 * @return Collection of discipline's students
+	 */
 	Collection<Student> getStudents() {
 		return _students;
 	}
 	
+	/**
+	 * @return discipline's name
+	 */
 	String getName() {
 		return _name;
 	}
 
+	/**
+	 * @return course where the discipline is registered
+	 */
 	Course getCourse() {
 		return _course;
 	}
 
+	/**
+	 * @return string that represents the discipline
+	 */
 	String show() {
 		String txt = String.format("* %s - %s", _course.getName(), _name);
 		return txt;
 	}
 	
+	/**
+	 * Adds a teacher to the discipline
+
+	 * @param teacher
+	 */
 	void addTeacher(Teacher teacher) {
 		_teachers.add(teacher);
 	}
 
+	/**
+	 * Adds a student to the discipline
+
+	 * @param student
+	 */
 	void enrollStudent(Student student) {
 		_students.add(student);
 	}
 	
+	/**
+	 * @param name
+	 * @return project with the given name
+	 * @throws NoSuchProjectIdException if the given project doesn't exist on the discipline
+	 */
 	Project getProject(String name) throws NoSuchProjectIdException {
 		for (Project p : _projects)
 			if (p.getName().equals(name))
@@ -60,6 +105,12 @@ public class Discipline implements Serializable, Comparable {
 		throw new NoSuchProjectIdException(name);
 	}
 
+	/**
+	 * Creates a project with the given name in the discipline
+
+	 * @param name
+	 * @throws DuplicateProjectIdException if the project already exists
+	 */
 	void createProject(String name) throws DuplicateProjectIdException {
 		// check if project exists
 		for (Project p : _projects)
@@ -68,6 +119,11 @@ public class Discipline implements Serializable, Comparable {
 		_projects.add(new Project(name));
 	}
 	
+
+	/**
+	 * @param o
+	 * @return an int that represents the sorting precedence of the disciplines
+	 */
 	@Override
 	public int compareTo(Object o) {
 		Discipline d = (Discipline) o;

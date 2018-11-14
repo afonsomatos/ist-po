@@ -25,9 +25,13 @@ import sth.core.exception.NoSuchProjectIdException;
  * The façade class.
  */
 public class SchoolManager {
-
+	/** School managed by SchoolManager*/
 	private School _school = new School();
+
+	/** Current logged user */
 	private Person _loggedUser;
+	
+	/** Current save file to store the program information */
 	private String _saveFile;
 	
 	
@@ -54,6 +58,9 @@ public class SchoolManager {
 		_loggedUser = _school.getPerson(id);
 	}
 
+	/**
+	 * @return the logged user
+	 */
 	public Person getLoggedUser(){
 		return _loggedUser;
 	}
@@ -87,21 +94,45 @@ public class SchoolManager {
 		return isLoggedUserStudent() && ((Student) _loggedUser).isRepresentative();
 	}
 	
+
+	/**
+	 * @param name
+	 * @return Collection of students of the given discipline
+	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
+	 */	
 	public Collection<Student> showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
 		Teacher teacher  = (Teacher) _loggedUser;
 		return teacher.getStudentsOfDiscipline(name);
 	}
 	
+	/**
+	 * Closes the given project.
+	 * @param discipline
+	 * @param name project name
+	 * @throws NoSuchProjectIdException if the given project isn't valid
+	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
+	 */
 	public void closeProject(String discipline, String name) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
 		Teacher teacher = (Teacher) _loggedUser;
 		teacher.getDiscipline(discipline).getProject(name).close();
 	}
 	
+	/**
+	 * Creates a project with given name.
+
+	 * @param discipline
+	 * @param name
+	 * @throws DuplicateProjectException if the project already exists
+	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
+	 */
 	public void createProject(String discipline, String name) throws DuplicateProjectIdException, NoSuchDisciplineIdException {
 		Teacher teacher = (Teacher) _loggedUser;
 		teacher.createProject(discipline, name);
 	}
 	
+	/**
+	 * Saves the information on the file stored by the SchoolManager.
+	 */
 	public void save() throws IOException {
 		FileOutputStream fout = new FileOutputStream(_saveFile);
 		ObjectOutputStream obOut = new ObjectOutputStream(fout);
@@ -110,6 +141,9 @@ public class SchoolManager {
 		obOut.close();
 	}
 	
+	/**
+	 * Reads the information on the file stored by the SchoolManager.
+	 */
 	public void open() throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonException {
 		FileInputStream fin = new FileInputStream(_saveFile);
 		ObjectInputStream obIn = new ObjectInputStream(fin);
@@ -123,23 +157,44 @@ public class SchoolManager {
 			throw new NoSuchPersonException(e.getId());
 		}
 	}
-	
+
+	/**
+	 * @return true if a save file has been specified, false in contrary
+	 */
 	public boolean hasSaveFile() {
 		return _saveFile != null;
 	}
 	
+	/**
+	 * Sets the save file to the given file
+
+	 * @param filename
+	 */
 	public void setSaveFile(String filename) {
 		_saveFile = filename;
 	}
 
+	/**
+	 * @return all the people of the school
+	 */
 	public List<Person> getAllUsers() {
 		return _school.getAllUsers();
 	}
 
+
+	/**
+	 * Sets the logged user phone number
+
+	 * @param phone
+	 */
 	public void setPhone(int phone) {
 		_loggedUser.setPhoneNumber(phone);
 	}
 	
+	/**
+	 * @param name
+	 * @return all the people of the school whose name contains the given name
+	 */
 	public Collection<Person> searchPerson(String name) {
 		return _school.searchPerson(name);
 	}
