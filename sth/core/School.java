@@ -13,7 +13,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 
 /**
- * School implementation.
+ * School class is responsible to store and show the main information of
+ * a school.  
  */
 public class School implements java.io.Serializable {
 
@@ -26,7 +27,10 @@ public class School implements java.io.Serializable {
 
 	private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
-
+	/**
+	 * School constructor initializes the parser responsible to parse the
+	 * school information.
+	 */
 	School() {
 		_parser = new Parser(this);
 	}
