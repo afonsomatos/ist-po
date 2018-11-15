@@ -48,7 +48,7 @@ public class Student extends Person {
 	}
 
 	/**
-	 * @return true if the student it's representative, false if he isn't
+	 * @return true if the student is representative, false if he isn't
 	 */
 	boolean isRepresentative() {
 		return _isRepresentative;

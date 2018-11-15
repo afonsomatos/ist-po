@@ -13,7 +13,8 @@ import sth.core.exception.BadEntryException;
 import sth.core.exception.NoSuchPersonIdException;
 
 /**
- * School implementation.
+ * School class is responsible to store and show the main information of
+ * a school.  
  */
 public class School implements java.io.Serializable {
 
@@ -26,7 +27,10 @@ public class School implements java.io.Serializable {
 
 	private Map<Integer, Person> _persons = new HashMap<Integer, Person>();
 
-
+	/**
+	 * School constructor initializes the parser responsible to parse the
+	 * school information.
+	 */
 	School() {
 		_parser = new Parser(this);
 	}
@@ -34,8 +38,8 @@ public class School implements java.io.Serializable {
 	/**
 	 * Parses the file which contains the starting information of the program.
 
-	 * @param filename
-	 * @throws BadEntryException
+	 * @param filename 
+	 * @throws BadEntryException thrown if one parsed line isn't valid 
 	 * @throws IOException
 	 */
 	void importFile(String filename) throws IOException, BadEntryException {
@@ -43,7 +47,7 @@ public class School implements java.io.Serializable {
 	}
 
 	/**
-	 * @return a list with all the people of the school sorted by id
+	 * @return list with all the people of the school sorted by id
 	 */
 	List<Person> getAllUsers() {
 		List<Person> users = new ArrayList<>(_persons.values());
@@ -54,7 +58,7 @@ public class School implements java.io.Serializable {
 
 	/**
 	 * @param id identifier of the person to obtain
-	 * @return a person with the given identifier
+	 * @return person with the given identifier
 	 * @throws NoSuchPersonIdException if there is no person with the given identifier
 	 */
 	Person getPerson(int id) throws NoSuchPersonIdException {
@@ -98,7 +102,7 @@ public class School implements java.io.Serializable {
 
 	/**
 	 * @param name name to search in the school
-	 * @return Collection of people whose name contains the given name sorted by name
+	 * @return Collection of people whose name contains the given name. The Collection is sorted by name
 	 */
 	Collection<Person> searchPerson(String name) {
 		return _persons.values()
@@ -114,7 +118,7 @@ public class School implements java.io.Serializable {
 	 * Checks if the given course exists. If it doesn't exist creates it and adds
 	 * it to the school.
 	 * 
-	 * @param header
+	 * @param header course name
 	 * @return the course with the given header
 	 */	
 	Course parseCourse(String header) {
