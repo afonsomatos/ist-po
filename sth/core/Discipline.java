@@ -90,7 +90,8 @@ public class Discipline implements Serializable, Comparable {
 	 * @param student
 	 */
 	void enrollStudent(Student student) {
-		_students.add(student);
+		if(_course.getStudents().contains(student))
+			_students.add(student);
 	}
 	
 	/**

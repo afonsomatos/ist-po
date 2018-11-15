@@ -48,15 +48,13 @@ public class Course implements Serializable {
 	 * Adds a representative student to the course
 
 	 * @param student
-	 * @return true if the student was added with success
 	 */
-	boolean addRepresentative(Student student) {
-		if(_representatives.size() <= 7) {
+	void addRepresentative(Student student) {
+		if(_representatives.size() < 7){
+			if(_representatives.contains(student))
+				return;
 			_representatives.add(student);
 			addStudent(student);
-			return true;
-		} else {
-			return false;
 		}
 	}
 
@@ -69,7 +67,6 @@ public class Course implements Serializable {
 		_representatives.remove(student);
 	}
 
-
 	/**
 	 * @return the name of the course
 	 */
@@ -77,6 +74,12 @@ public class Course implements Serializable {
 		return _name;
 	}
 
+	/**
+	 * @return students of the course
+	 */
+	public List<Student> getStudents(){	
+		return _students;	
+	}
 
 	/**
 	 * Checks if the given discipline exists if it doesn't exist creates it
