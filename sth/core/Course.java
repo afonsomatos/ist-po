@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 
 /**
- * Course implemenation.
+ * Course implementation.
  */
 public class Course implements Serializable {
 
@@ -47,11 +47,17 @@ public class Course implements Serializable {
 	/**
 	 * Adds a representative student to the course
 
-	 * @param student 
+	 * @param student
+	 * @return true if the student was added with success
 	 */
-	void addRepresentative(Student student) {
-		if(_representatives.size() < 7)
+	boolean addRepresentative(Student student) {
+		if(_representatives.size() <= 7) {
 			_representatives.add(student);
+			addStudent(student);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

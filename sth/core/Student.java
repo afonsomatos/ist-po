@@ -64,11 +64,18 @@ public class Student extends Person {
 		if (components.length != 2)
 			throw new BadEntryException("Invalid line context " + lineContext);
 
-		if (_course == null) {
+		if (_course == null)
 			_course = school.parseCourse(components[0]);
-			_course.addStudent(this);
-		}
 
+		if (_isRepresentative) {
+		 if (!_course.addRepresentative(this)) {
+			 return;
+		 }
+		} else {
+			_course.addStudent(this);
+			
+		}
+		
 		Discipline dis = _course.parseDiscipline(components[1]);
 		
 		if(_disciplines.size() < 6){
