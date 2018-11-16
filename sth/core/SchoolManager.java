@@ -69,8 +69,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is an administrative
 	 */
 	public boolean isLoggedUserAdministrative() {
-		//FIXME implement predicate
-		return false;
+		return _loggedUser instanceof Employee;
 	}
 
 	/**
