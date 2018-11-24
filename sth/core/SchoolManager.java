@@ -9,8 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.List;
 
-import sth.app.exception.DuplicateProjectException;
-import sth.app.exception.NoSuchPersonException;
 import sth.core.exception.BadEntryException;
 import sth.core.exception.ClosingSurveyException;
 import sth.core.exception.DuplicateProjectIdException;
@@ -146,19 +144,16 @@ public class SchoolManager {
 	
 	/**
 	 * Reads the information on the file stored by the SchoolManager.
+	 * @throws NoSuchPersonIdException 
 	 */
-	public void open() throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonException {
+	public void open() throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonIdException {
 		FileInputStream fin = new FileInputStream(_saveFile);
 		ObjectInputStream obIn = new ObjectInputStream(fin);
 		School school = (School) obIn.readObject();
 		obIn.close();
 
-		try {
-			_loggedUser = school.getPerson(_loggedUser.getId());
-			_school = school;
-		} catch (NoSuchPersonIdException e) {
-			throw new NoSuchPersonException(e.getId());
-		}
+		_loggedUser = school.getPerson(_loggedUser.getId());
+		_school = school;
 	}
 
 	/**
