@@ -2,10 +2,11 @@ package sth.app.student;
 
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import sth.core.SchoolManager;
 
+import sth.core.SchoolManager;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.app.exception.NoSurveyException;
 
 /**
  * 4.5.2. Answer survey.
@@ -30,7 +31,7 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 		try{
 			_receiver.answerSurvey(_hours.value(),_comment.value(), _discipline.value(), _project.value());
 		} catch(sth.core.exception.NoSurveyException nse){
-			throw new sth.app.exception.NoSurveyException(_discipline.value(), _project.value());
+			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}
 
