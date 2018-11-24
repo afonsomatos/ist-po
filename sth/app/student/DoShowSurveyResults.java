@@ -26,7 +26,7 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
 		try{
 			_display.addLine(_receiver.getSurveyResults(_discipline.value(), _project.value()));
 		} catch(sth.core.exception.NoSurveyException nse){
-			throw new sth.app.exception.NoSuchSurveyException(_discipline.value(), _project.value());
+			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}
 
