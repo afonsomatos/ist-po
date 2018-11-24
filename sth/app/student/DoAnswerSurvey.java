@@ -12,6 +12,7 @@ import sth.core.exception.NoSuchDisciplineIdException;
  */
 public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 
+	private Input<Integer> _hours;
 	private Input<String> _comment;
 
 	/**
@@ -19,13 +20,18 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 	 */
 	public DoAnswerSurvey(SchoolManager receiver) {
 		super(Label.ANSWER_SURVEY, receiver);
+		_hours = _form.addIntegerInput(Message.requestProjectHours());
 		_comment = _form.addStringInput(Message.requestComment());
 	}
 
 	/** @see sth.app.common.ProjectCommand#myExecute() */
 	@Override
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
-		_receiver.answerSurvey(_comment.value(), _discipline.value(), _project.value());
+		try{
+			_receiver.answerSurvey(_hours.value(),_comment.value(), _discipline.value(), _project.value());
+		} catch(sth.core.exception.NoSurveyException nse){
+			throw new sth.app.exception.NoSurveyException(_discipline.value(), _project.value());
+		}
 	}
 
 }
