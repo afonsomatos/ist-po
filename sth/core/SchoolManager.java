@@ -197,6 +197,17 @@ public class SchoolManager {
 		return _school.searchPerson(name);
 	}
 	
+	public void answerSurvey(int hours, String message, String discipline, String proj) throws NoSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException {
+		Student student = (Student) _loggedUser;
+		Survey survey = student.getDiscipline(discipline).getProject(proj).getSurvey();
+		survey.addAnswer(student, message, hours);
+	}
+	
+	public void deliverProject(String content, String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
+		Student student = (Student) _loggedUser;
+		student.getDiscipline(discipline).getProject(proj).addSubmission(student, content);
+	}
+
 	public String getSurveyResults(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
 		Discipline d;
 		if (_loggedUser instanceof Teacher) {

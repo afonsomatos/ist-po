@@ -80,13 +80,15 @@ public class Survey {
 			}
 		}
 		
-		return String.join("\n",
-				" * Número de submissões: " + _project.getSubmissions().size() + "\n",
-				" * Número de respostas: " + quant + "\n",
-				" * Tempos de resolução: (horas) (mínimo, médio, máximo): " +
-						String.format("%d, %d, %d", min, total/quant, max),
-				""
-				) ;
+		if (person instanceof Teacher) {
+			header += "\n * Número de submissões: " + _project.getSubmissions().size();
+		}
+		
+		header += "\n * Número de respostas: " + quant;
+		header += "\n * Tempos de resolução: (horas) (mínimo, médio, máximo): " +
+						String.format("%d, %d, %d", min, total/quant, max);
+		header += "\n";
+		return header;
 	}
 
 }
