@@ -23,7 +23,11 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
-		//FIXME implement command
+		try{
+			_display.addLine(_receiver.getSurveyResults(_discipline.value(), _project.value()));
+		} catch(sth.core.exception.NoSurveyException nse){
+			throw new sth.app.expception.NoSuchSurveyException(_discipline.value(), _project.value());
+		}
 	}
 
 }
