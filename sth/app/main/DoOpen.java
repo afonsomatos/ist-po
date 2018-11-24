@@ -5,10 +5,10 @@ import java.io.IOException;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Form;
 import pt.tecnico.po.ui.Input;
-
+import sth.app.exception.NoSuchPersonException;
 import sth.core.SchoolManager;
+import sth.core.exception.NoSuchPersonIdException;
 
 /**
  * 4.1.1. Open existing document.
@@ -36,6 +36,8 @@ public class DoOpen extends Command<SchoolManager> {
 			_display.popup(Message.fileNotFound());
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
+		} catch (NoSuchPersonIdException e) {
+			throw new NoSuchPersonException(e.getId());
 		}
 	}
 
