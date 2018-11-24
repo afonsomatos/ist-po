@@ -6,12 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.IntStream;
-
 import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NonEmptySurveyException;
-import sth.core.exception.OpeningSurveyException;
-import sth.core.exception.SurveyFinishedException;
 
 public class Survey implements Serializable {
 	

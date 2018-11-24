@@ -15,7 +15,7 @@ import sth.core.exception.NoSurveyException;
 /**
  * Discipline Implementation.
  */
-public class Discipline implements Serializable, Comparable {
+public class Discipline implements Serializable, Comparable<Discipline> {
 	
 	/** Serial number for serialization */
 	private static final long serialVersionUID = 1L;
@@ -127,8 +127,7 @@ public class Discipline implements Serializable, Comparable {
 	 * @return an int that represents the sorting precedence of the disciplines
 	 */
 	@Override
-	public int compareTo(Object o) {
-		Discipline d = (Discipline) o;
+	public int compareTo(Discipline d) {
 		
 		// try to order by course name
 		int compareCourse = _course.getName().compareTo(d.getCourse().getName());
@@ -149,6 +148,6 @@ public class Discipline implements Serializable, Comparable {
 			}
 		}
 		return msg;
-	}
 
+	}
 }

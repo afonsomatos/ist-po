@@ -6,7 +6,6 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 
-import sth.core.Person;
 import sth.core.SchoolManager;
 import sth.core.Student;
 import sth.core.exception.NoSuchDisciplineIdException;

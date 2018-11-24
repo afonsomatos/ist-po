@@ -1,9 +1,6 @@
 package sth.app.main;
 
 import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 

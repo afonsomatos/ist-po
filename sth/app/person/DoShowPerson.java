@@ -1,8 +1,6 @@
 package sth.app.person;
 
 import pt.tecnico.po.ui.Command;
-import pt.tecnico.po.ui.Display;
-
 import sth.core.SchoolManager;
 
 /**

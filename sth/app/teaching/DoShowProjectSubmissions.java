@@ -1,8 +1,6 @@
 package sth.app.teaching;
 
 import pt.tecnico.po.ui.DialogException;
-import pt.tecnico.po.ui.Input;
-
 import sth.core.SchoolManager;
 import sth.core.Submission;
 import sth.core.exception.NoSuchDisciplineIdException;

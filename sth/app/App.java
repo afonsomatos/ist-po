@@ -6,13 +6,9 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Menu;
 
 import sth.core.exception.ImportFileException;
-import sth.core.exception.BadEntryException;
 import sth.core.SchoolManager;
-import sth.core.Person;
 import sth.app.main.MainMenu;
 import sth.app.person.DoLogin;
-
-import java.io.IOException;
 
 /**
  * Main driver for the travel management application.

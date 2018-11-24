@@ -3,8 +3,6 @@ package sth.app.person;
 import java.util.Collection;
 
 import pt.tecnico.po.ui.Command;
-import pt.tecnico.po.ui.Display;
-
 import sth.core.SchoolManager;
 import sth.core.Person;
 
