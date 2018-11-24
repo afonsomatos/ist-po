@@ -1,19 +1,27 @@
 package sth.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
-public class Survey {
+import sth.core.exception.NonEmptySurveyException;
+import sth.core.exception.OpeningSurveyException;
+import sth.core.exception.SurveyFinishedException;
+
+public class Survey implements Serializable {
 	
-	private enum Condition {
+	private static final long serialVersionUID = 1787291686470022116L;
+
+	enum Condition {
 		CREATED,
 		OPENED,
 		CLOSED,
-		FINALIZED,
-		CANCELED
+		FINISHED,
+		CANCELED,
 	};
 	
 	private Project _project = null;
@@ -26,26 +34,26 @@ public class Survey {
 		_project = project;
 	}
 	
-	void open() {
-		// TODO
+	Condition getCondition() {
+		return _condition;
 	}
 	
-	void close() {
-		// TODO
+	boolean empty() {
+		return _answers.size() == 0;
 	}
 	
-	void doFinalize() {
-		// TODO
+	void setCondition(Condition condition) {
+		_condition = condition;
 	}
 	
+
 	void addAnswer(Student student, String message, int hours) {
 		if (!_students.contains(student))
 			_answers.add(new Answer(message, hours));
 		// TODO raise exception?
 	}
 	
-	String getResultsFor(Person person) {
-
+	String getSummary(boolean expand) {
 		List<Condition> active = Arrays.asList(
 				Condition.OPENED,
 				Condition.CLOSED, 
@@ -63,6 +71,19 @@ public class Survey {
 				state = "fechado";
 			return header + " (" + state + ")\n";
 		}
+		
+		int med = _answers.stream().mapToInt(Answer::getHours).sum() / _answers.size();
+		
+		if (expand)
+			header += String.format(" - %d respostas - %d horas\n",
+					_answers.size(), med);
+		
+		return header;
+	}
+	
+	String getResultsFor(Person person) {
+
+		String header = getSummary(false);
 		
 		int total = 0,
 			min = 0,
@@ -85,10 +106,14 @@ public class Survey {
 		}
 		
 		header += "\n * Número de respostas: " + quant;
-		header += "\n * Tempos de resolução: (horas) (mínimo, médio, máximo): " +
+		
+		if (person instanceof Student) {
+			header += "\n * Tempo médio (horas): " + total/quant;
+		} else {
+			header += "\n * Tempos de resolução (horas) (mínimo, médio, máximo): " +
 						String.format("%d, %d, %d", min, total/quant, max);
-		header += "\n";
-		return header;
+		}
+		return header + '\n';
 	}
 
 }

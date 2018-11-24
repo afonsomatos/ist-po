@@ -1,6 +1,10 @@
 package sth.core;
 
-public class Answer {
+import java.io.Serializable;
+
+public class Answer implements Serializable {
+
+	private static final long serialVersionUID = -5496071551526664326L;
 
 	private String _message;
 	private int _hours;

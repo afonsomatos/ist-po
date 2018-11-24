@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyException;
 
 
 /**
@@ -32,7 +33,7 @@ public class Discipline implements Serializable, Comparable {
 	private List<Teacher> _teachers = new ArrayList<Teacher>();
 	
 	/** List of projects of the discipline */
-	private List<Project> _projects = new ArrayList<>();
+	private Set<Project> _projects = new TreeSet<>();
 
 
 	/**
@@ -136,6 +137,18 @@ public class Discipline implements Serializable, Comparable {
 		
 		// order by discipline name
 		return getName().compareTo(d.getName());
+	}
+	
+	String getSurveyResults() {
+		String msg = "";
+		for (Project p : _projects) {
+			try {
+				msg += p.getSurvey().getSummary(true) + "\n";
+			} catch (NoSurveyException e) {
+				// don't add
+			}
+		}
+		return msg;
 	}
 
 }
