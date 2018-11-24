@@ -234,7 +234,7 @@ public class SchoolManager {
 		student.getDiscipline(discipline).getProject(proj).addSubmission(student, content);
 	}
 
-	public String getDisciplieSurveyResults(String discipline) throws NoSuchDisciplineIdException {
+	public String getDisciplineSurveyResults(String discipline) throws NoSuchDisciplineIdException {
 		return ((Student) _loggedUser).getDiscipline(discipline).getSurveyResults();
 	}
 	
