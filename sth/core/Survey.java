@@ -72,7 +72,9 @@ public class Survey implements Serializable {
 			return header + " (" + state + ")\n";
 		}
 		
-		int med = _answers.stream().mapToInt(Answer::getHours).sum() / _answers.size();
+		int med = 0;
+		if (_answers.size() > 0)
+			med = _answers.stream().mapToInt(Answer::getHours).sum() / _answers.size();
 		
 		if (expand)
 			header += String.format(" - %d respostas - %d horas\n",
@@ -108,10 +110,10 @@ public class Survey implements Serializable {
 		header += "\n * Número de respostas: " + quant;
 		
 		if (person instanceof Student) {
-			header += "\n * Tempo médio (horas): " + total/quant;
+			header += "\n * Tempo médio (horas): " + (quant == 0 ? 0 : total);
 		} else {
 			header += "\n * Tempos de resolução (horas) (mínimo, médio, máximo): " +
-						String.format("%d, %d, %d", min, total/quant, max);
+						String.format("%d, %d, %d", min, (quant==0?0:total/quant), max);
 		}
 		return header + '\n';
 	}
