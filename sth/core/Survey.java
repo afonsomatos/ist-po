@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NonEmptySurveyException;
 import sth.core.exception.OpeningSurveyException;
 import sth.core.exception.SurveyFinishedException;
@@ -47,7 +48,10 @@ public class Survey implements Serializable {
 	}
 	
 
-	void addAnswer(Student student, String message, int hours) {
+	void addAnswer(Student student, String message, int hours) throws NoSuchProjectIdException {
+		if (!_project.studentSubmited(student))
+			throw new NoSuchProjectIdException(_project.getName());
+		
 		if (!_students.contains(student)) {
 			_answers.add(new Answer(message, hours));
 			_students.add(student);

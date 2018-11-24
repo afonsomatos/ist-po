@@ -143,7 +143,7 @@ public class Discipline implements Serializable, Comparable {
 		String msg = "";
 		for (Project p : _projects) {
 			try {
-				msg += p.getSurvey().getSummary(true) + "\n";
+				msg += p.getSurvey().getSummary(true);
 			} catch (NoSurveyException e) {
 				// don't add
 			}

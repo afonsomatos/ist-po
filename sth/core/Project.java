@@ -56,6 +56,13 @@ public class Project implements Serializable, Comparable<Project> {
 		return _name;
 	}
 	
+	boolean studentSubmited(Student student) {
+		for (Submission s : _submissions)
+			if (s.getStudent() == student)
+				return true;
+		return false;
+	}
+	
 	void finishSurvey() throws NoSurveyException, SurveyFinishedException {
 		Survey survey = getSurvey();
 		Condition condition = survey.getCondition();
