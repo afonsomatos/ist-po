@@ -3,10 +3,9 @@ package sth.app.representative;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
-import sth.core.SchoolManager;
-import sth.core.NoSuchDisciplineIdException;
 import sth.app.exception.NoSuchDisciplineException;
+import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 /**
  * 4.6.6. Show discipline surveys.

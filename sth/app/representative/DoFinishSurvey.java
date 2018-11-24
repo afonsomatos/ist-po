@@ -28,7 +28,7 @@ public class DoFinishSurvey extends sth.app.common.ProjectCommand {
 			_receiver.finishSurvey(_discipline.value(), _project.value());
 		} catch(sth.core.exception.NoSurveyException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.FinishingSurveyException fse) {
+		} catch(sth.core.exception.SurveyFinishedException fse) {
 			throw new FinishingSurveyException(_discipline.value(), _project.value());
 		}
 	}

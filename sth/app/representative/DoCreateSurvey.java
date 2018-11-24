@@ -24,7 +24,7 @@ public class DoCreateSurvey extends sth.app.common.ProjectCommand {
 	@Override
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{	
-			_receiver.createProject(_discipline.value(), _project.value());
+			_receiver.createSurvey(_discipline.value(), _project.value());
 		} catch(sth.core.exception.DuplicateSurveyException dse) {
 			throw new DuplicateSurveyException(_discipline.value(), _project.value());
 		}
