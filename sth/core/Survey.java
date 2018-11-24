@@ -48,8 +48,10 @@ public class Survey implements Serializable {
 	
 
 	void addAnswer(Student student, String message, int hours) {
-		if (!_students.contains(student))
+		if (!_students.contains(student)) {
 			_answers.add(new Answer(message, hours));
+			_students.add(student);
+		}
 		// TODO raise exception?
 	}
 	

@@ -27,7 +27,7 @@ public class DoShowDisciplineSurveys extends Command<SchoolManager> {
 	public final void execute() throws DialogException {
 		try{
 			_form.parse();
-			_display.addLine(_receiver.getDisciplineSurveyResults(_discipline.value()));
+			_display.add(_receiver.getDisciplineSurveyResults(_discipline.value()));
 			_display.display();
 		} catch(NoSuchDisciplineIdException nsde) {
 			throw new NoSuchDisciplineException(_discipline.value());
