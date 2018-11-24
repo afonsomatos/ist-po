@@ -27,7 +27,7 @@ public class DoCreateProject extends sth.app.common.ProjectCommand {
 		try {
 			_receiver.createProject(_discipline.value(),_project.value());
 		} catch(DuplicateProjectIdException dpe) {
-			throw new DuplicateProjectException(_discipline.value(),_project.value());
+			throw new DuplicateProjectException(_discipline.value(), _project.value());
 		}
 	
 	}
