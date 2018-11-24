@@ -24,7 +24,7 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{
 			_display.display(_receiver.getSurveyResults(_discipline.value(), _project.value()));
-		} catch(sth.core.NoSurveyException nse) {
+		} catch(sth.core.exception.NoSurveyException nse) {
 			throw new sth.app.exception.NoSurveyException(_discipline.value(), _project.value());
 		}
 	}

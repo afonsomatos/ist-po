@@ -88,7 +88,7 @@ public class Teacher extends Person {
 			discipline.addTeacher(this);
 			_disciplines.add(discipline);
 	 }
- 
+
 	/**
 	 * @return all the students of a teacher discipline
 	 * @throws NoSuchDisciplineIdException if the discipline isn't valid

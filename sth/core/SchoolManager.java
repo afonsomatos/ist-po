@@ -8,17 +8,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import sth.app.exception.DuplicateProjectException;
 import sth.app.exception.NoSuchPersonException;
-
 import sth.core.exception.BadEntryException;
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.NoSurveyException;
 
 
 /**
@@ -196,6 +195,21 @@ public class SchoolManager {
 	 */
 	public Collection<Person> searchPerson(String name) {
 		return _school.searchPerson(name);
+	}
+	
+	public String getSurveyResults(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
+		Discipline d;
+		if (_loggedUser instanceof Teacher) {
+			d = ((Teacher) _loggedUser).getDiscipline(discipline);
+		} else {
+			d = ((Student) _loggedUser).getDiscipline(discipline);
+		}
+		return d.getProject(proj).getSurvey().getResultsFor(_loggedUser);
+	}
+	
+	public Collection<Submission> getProjectSubmissions(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
+		Teacher teacher = (Teacher) _loggedUser;
+		return teacher.getDiscipline(discipline).getProject(proj).getSubmissions();
 	}
 	
 }

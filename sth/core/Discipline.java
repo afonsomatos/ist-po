@@ -117,7 +117,7 @@ public class Discipline implements Serializable, Comparable {
 		for (Project p : _projects)
 			if (p.getName().equals(name))
 				throw new DuplicateProjectIdException(name);
-		_projects.add(new Project(name));
+		_projects.add(new Project(name, this));
 	}
 	
 

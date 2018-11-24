@@ -1,6 +1,10 @@
 package sth.core;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
+
+import sth.core.exception.NoSurveyException;
 
 
 /**
@@ -17,13 +21,29 @@ public class Project implements Serializable {
 	/** Boolean that represents the state of the project */
 	private boolean _closed = false;
 	
+	private Discipline _discipline;
+	
+	private Set<Submission> _submissions = new TreeSet<Submission>(new Comparator<Submission>() {
+		@Override
+		public int compare(Submission o1, Submission o2) {
+			return o1.getStudent().getId() - o2.getStudent().getId();
+		}
+	});
+	
+	private Survey _survey = null;
+	
 	/**
 	 * Project constructor.
 
 	 * @param name
 	 */
-	Project(String name) {
+	Project(String name, Discipline discipline) {
 		_name = name;
+		_discipline = discipline;
+	}
+	
+	Discipline getDiscipline() {
+		return _discipline;
 	}
 	
 	/**
@@ -31,6 +51,21 @@ public class Project implements Serializable {
 	 */
 	public String getName() {
 		return _name;
+	}
+	
+	Survey getSurvey() throws NoSurveyException {
+		if (_survey == null)
+			throw new NoSurveyException();
+		return _survey;
+	}
+	
+	void addSubmission(Student student, String message) {
+		_submissions.removeIf(s -> s.getStudent() == student);
+		_submissions.add(new Submission(student, message));
+	}
+	
+	Collection<Submission> getSubmissions() {
+		return _submissions;
 	}
 	
 	/**

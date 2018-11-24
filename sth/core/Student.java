@@ -4,10 +4,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import sth.core.exception.BadEntryException;
+import sth.core.exception.NoSuchDisciplineIdException;
 
 
 /**
- * Student implemenation.
+ * Student implementation.
  */
 public class Student extends Person {
 
@@ -23,6 +24,7 @@ public class Student extends Person {
 	/** Course where the student is registered */
 	private Course _course;
 
+	
 
 	/**
 	 * Student constructor.
@@ -37,7 +39,14 @@ public class Student extends Person {
 		_isRepresentative = isRepresentative;
 	}
 
-
+	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
+		for (Discipline d : _disciplines) {
+			if (d.getName().equals(name))
+				return d;
+		}
+		throw new NoSuchDisciplineIdException(name);
+	}
+	
 	/**
 	 * Sets the student to be representative.
 
