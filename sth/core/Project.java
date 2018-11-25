@@ -12,6 +12,7 @@ import sth.core.exception.NoSurveyException;
 import sth.core.exception.NonEmptySurveyException;
 import sth.core.exception.OpeningSurveyException;
 import sth.core.exception.SurveyFinishedException;
+import sth.core.exception.NoSuchProjectIdException;
 
 
 /**
@@ -120,7 +121,9 @@ public class Project implements Serializable, Comparable<Project> {
 		return _survey;
 	}
 	
-	void addSubmission(Student student, String message) {
+	void addSubmission(Student student, String message) throws NoSuchProjectIdException{
+		if(_closed == true)
+			throw new NoSuchProjectIdException(_name);
 		_submissions.removeIf(s -> s.getStudent() == student);
 		_submissions.add(new Submission(student, message));
 	}
