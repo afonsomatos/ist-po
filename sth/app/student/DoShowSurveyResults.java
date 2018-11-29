@@ -1,11 +1,10 @@
 package sth.app.student;
 
+import sth.app.exception.NoSurveyException;
 import sth.core.SchoolManager;
-
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.survey.NoSurveyIdException;
-import sth.app.exception.NoSurveyException;
 
 /**
  * 4.5.3. Show survey results.

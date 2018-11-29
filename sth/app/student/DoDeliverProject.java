@@ -2,11 +2,10 @@ package sth.app.student;
 
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-import sth.core.SchoolManager;
-
-import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSuchDisciplineIdException;
 import sth.app.exception.NoSuchProjectException;
+import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 /**
  * 4.5.1. Deliver project.

@@ -1,10 +1,11 @@
 package sth.app.teaching;
 
 import pt.tecnico.po.ui.DialogException;
-import sth.core.SchoolManager;
-import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSuchDisciplineIdException;
 import sth.app.exception.NoSurveyException;
+import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.survey.NoSurveyIdException;
 
 /**
  * 4.4.5. Show survey results.
@@ -24,7 +25,7 @@ public class DoShowSurveyResults extends sth.app.common.ProjectCommand {
 		try{
 			_display.add(_receiver.getSurveyResults(_discipline.value(), _project.value()));
 			_display.display();
-		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
+		} catch(NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}

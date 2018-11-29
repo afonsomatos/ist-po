@@ -2,8 +2,8 @@ package sth.app.teaching;
 
 import pt.tecnico.po.ui.DialogException;
 import sth.core.SchoolManager;
-import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 /**
  * 4.4.2. Close project.

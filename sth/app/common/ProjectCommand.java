@@ -3,13 +3,11 @@ package sth.app.common;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
-import sth.app.exception.NoSuchProjectException;
 import sth.app.exception.NoSuchDisciplineException;
-
+import sth.app.exception.NoSuchProjectException;
 import sth.core.SchoolManager;
-import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
 
 /**
  * Represents the super class Command of all commands that concern a project.

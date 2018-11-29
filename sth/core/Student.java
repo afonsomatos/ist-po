@@ -102,11 +102,11 @@ public class Student extends Person {
 	 * @return the string that represents the particular information of the student
 	 */
 	@Override
-	public String toString() {
-		String header = super.toString();
+	protected String getDetails() {
+		String str = "";
 		for (Discipline d : _disciplines)
-			header += '\n' + d.show();
-		return header;
+			str += "\n" + d.show();
+		return str;
 	}
 	
 }

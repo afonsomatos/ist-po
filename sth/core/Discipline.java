@@ -27,10 +27,10 @@ public class Discipline implements Serializable, Comparable<Discipline> {
 	private Course _course;
 	
 	/** Set of students of the discipline */
-	private Set<Student> _students = new TreeSet<Student>();
+	private Set<Student> _students = new TreeSet<>();
 	
-	/** List of students of the discipline */
-	private List<Teacher> _teachers = new ArrayList<Teacher>();
+	/** List of teachers of the discipline */
+	private List<Teacher> _teachers = new ArrayList<>();
 	
 	/** List of projects of the discipline */
 	private Set<Project> _projects = new TreeSet<>();
@@ -144,10 +144,18 @@ public class Discipline implements Serializable, Comparable<Discipline> {
 			try {
 				msg += p.getSurvey().getSummary(true);
 			} catch (NoSurveyIdException e) {
-				// don't add
+				// Project has no survey, don't add to results
 			}
 		}
 		return msg;
 
 	}
+	
+	void notifyPersons(String message) {
+		for (Student s : _students)
+			s.notify(this, message);
+		for (Teacher t : _teachers)
+			t.notify(this, message);
+	}
+	
 }

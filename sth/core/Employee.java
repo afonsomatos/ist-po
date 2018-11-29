@@ -29,5 +29,11 @@ public class Employee extends Person {
 	protected String getLabel() {
 		return "FUNCIONÁRIO";
 	}
+
+
+	@Override
+	protected String getDetails() {
+		return "";
+	}
 	
 }

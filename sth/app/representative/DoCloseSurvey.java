@@ -1,11 +1,13 @@
 package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
-import sth.core.SchoolManager;
-import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSuchDisciplineIdException;
-import sth.app.exception.NoSurveyException;
 import sth.app.exception.ClosingSurveyException;
+import sth.app.exception.NoSurveyException;
+import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.survey.ClosingSurveyIdException;
+import sth.core.exception.survey.NoSurveyIdException;
 
 /**
  * 4.5.4. Close survey.
@@ -23,9 +25,9 @@ public class DoCloseSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
 		try{
 			_receiver.closeSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
+		} catch(NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.ClosingSurveyIdException cse) {
+		} catch(ClosingSurveyIdException cse) {
 			throw new ClosingSurveyException(_discipline.value(), _project.value());
 		}
 	}

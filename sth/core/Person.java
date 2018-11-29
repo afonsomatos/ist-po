@@ -2,7 +2,10 @@ package sth.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import sth.core.exception.BadEntryException;
 
@@ -21,11 +24,14 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	/** Person's name */
 	private String _name;
 
-	/** Person's phone number*/
+	/** Person's phone number */
 	private int _phoneNumber;
 	
 	/** Inbox messages */
-	private List<String> _inbox = new ArrayList<>();
+	private List<String> _inbox = new ArrayList<String>();
+	
+	/** Don't receive messages from these disciplines */
+	private Set<Discipline> _inboxBlocks = new HashSet<>();
 
 	/**
 	 * Person constructor.
@@ -40,6 +46,25 @@ public abstract class Person implements Serializable, Comparable<Person> {
 		_phoneNumber = phoneNumber;
 	}
 
+	Collection<String> readInbox() {
+		Collection<String> all = new ArrayList<>(_inbox);
+		_inbox.clear();
+		return all;
+	}
+	
+	void unblock(Discipline discipline) {
+		_inboxBlocks.remove(discipline);
+	}
+	
+	void block(Discipline discipline) {
+		_inboxBlocks.add(discipline);
+	}
+	
+	void notify(Discipline discipline, String message) {
+		if (!_inboxBlocks.contains(discipline))
+			_inbox.add(message);
+	}
+	
 	/**
 	 * Sets person phone number to given one.
 
@@ -69,7 +94,11 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	 */
 	protected abstract String getLabel();
 
-
+	/**
+	 * @return the details of each person
+	 */
+	protected abstract String getDetails();
+	
 	/**
 	 * @param p
 	 * @return an int that represents the sorting precedence
@@ -83,7 +112,7 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	 * @return string that represents the person
 	 */
 	public String toString() {
-		return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name);
+		return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name) + getDetails();
 	}
 	
 	/**

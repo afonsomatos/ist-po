@@ -32,6 +32,8 @@ public class DoOpen extends Command<SchoolManager> {
 			_form.parse();
 			_receiver.setSaveFile(_fileName.value());
 			_receiver.open();
+			_display.addLine(_receiver.readInbox());
+			_display.display();
 		} catch (FileNotFoundException fnfe) {
 			_display.popup(Message.fileNotFound());
 		} catch (ClassNotFoundException | IOException e) {

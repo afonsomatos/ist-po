@@ -3,11 +3,9 @@ package sth.app.person;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
+import sth.app.exception.NoSuchPersonException;
 import sth.core.SchoolManager;
 import sth.core.exception.NoSuchPersonIdException;
-
-import sth.app.exception.NoSuchPersonException;
 
 /**
  * 4.2.1. Show person.

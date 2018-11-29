@@ -3,8 +3,8 @@ package sth.app.person;
 import java.util.Collection;
 
 import pt.tecnico.po.ui.Command;
-import sth.core.SchoolManager;
 import sth.core.Person;
+import sth.core.SchoolManager;
 
 /**
  * 4.2.3. Show all persons.

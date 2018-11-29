@@ -99,13 +99,12 @@ public class Project implements Serializable, Comparable<Project> {
 	 * Closes the project.
 	 */
 	void close() {
-		if (_survey != null)
+		if (_survey != null && _survey.getState() == Survey.State.CREATED)
 			try {
 				_survey.open();
 			} catch (OpeningSurveyIdException e) {
-				// Ignore
+				// Never thrown, created survey always opens
 			}
-		
 		_closed = true;
 	}
 

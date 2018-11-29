@@ -105,15 +105,12 @@ public class Teacher extends Person {
 		return "DOCENTE";
 	}
 	
-	/**
-	 * @return the string that represents the particular information of the teacher
-	 */	
 	@Override
-	public String toString() {
-		String header = super.toString();
-			for (Discipline d : _disciplines)
-				header += '\n' + d.show();
-			return header;
+	protected String getDetails() {
+		String str = "";
+		for (Discipline d : _disciplines)
+			str += "\n" + d.show();
+		return str;
 	}
 	
 }

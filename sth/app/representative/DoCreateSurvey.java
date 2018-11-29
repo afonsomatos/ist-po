@@ -1,10 +1,11 @@
 package sth.app.representative;
 
 import pt.tecnico.po.ui.DialogException;
+import sth.app.exception.DuplicateSurveyException;
 import sth.core.SchoolManager;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
-import sth.app.exception.DuplicateSurveyException;
+import sth.core.exception.survey.DuplicateSurveyIdException;
 
 /**
  * 4.5.1. Create survey.
@@ -23,7 +24,7 @@ public class DoCreateSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{	
 			_receiver.createSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.DuplicateSurveyIdException dse) {
+		} catch(DuplicateSurveyIdException dse) {
 			throw new DuplicateSurveyException(_discipline.value(), _project.value());
 		}
 	}

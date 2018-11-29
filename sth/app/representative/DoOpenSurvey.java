@@ -6,6 +6,8 @@ import sth.app.exception.OpeningSurveyException;
 import sth.core.SchoolManager;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.survey.NoSurveyIdException;
+import sth.core.exception.survey.OpeningSurveyIdException;
 
 /**
  * 4.6.3. Open survey.
@@ -24,9 +26,9 @@ public class DoOpenSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{
 			_receiver.openSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
+		} catch(NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.OpeningSurveyIdException ose){
+		} catch(OpeningSurveyIdException ose){
 			throw new OpeningSurveyException(_discipline.value(), _project.value());
 		}
 	}

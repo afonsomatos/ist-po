@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
-
 import sth.core.Person;
 import sth.core.SchoolManager;
 

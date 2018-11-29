@@ -2,11 +2,11 @@ package sth.app.student;
 
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
-
-import sth.core.SchoolManager;
-import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSuchDisciplineIdException;
 import sth.app.exception.NoSurveyException;
+import sth.core.SchoolManager;
+import sth.core.exception.NoSuchDisciplineIdException;
+import sth.core.exception.NoSuchProjectIdException;
+import sth.core.exception.survey.NoSurveyIdException;
 
 /**
  * 4.5.2. Answer survey.
@@ -30,7 +30,7 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
 		try{
 			_receiver.answerSurvey(_hours.value(),_comment.value(), _discipline.value(), _project.value());
-		} catch(sth.core.exception.survey.NoSurveyIdException nse){
+		} catch(NoSurveyIdException nse){
 			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}

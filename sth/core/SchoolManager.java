@@ -279,4 +279,8 @@ public class SchoolManager {
 		return res;
 	}
 	
+	public String readInbox() {
+		return String.join("\n", _loggedUser.readInbox());
+	}
+	
 }

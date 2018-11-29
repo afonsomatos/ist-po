@@ -11,7 +11,6 @@ import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.survey.ClosingSurveyIdException;
 import sth.core.exception.survey.NonEmptySurveyIdException;
 import sth.core.exception.survey.OpeningSurveyIdException;
-import sth.core.exception.survey.SurveyIdException;
 import sth.core.exception.survey.SurveyFinishedIdException;
 
 class Survey implements Serializable {
@@ -62,7 +61,6 @@ class Survey implements Serializable {
 			_students.add(student);
 		}
 		
-		// TODO raise exception?
 	}
 	
 	/**
@@ -105,8 +103,6 @@ class Survey implements Serializable {
 		int[] stats = getStats();
 		int quant = stats[0];
 		int total = stats[1];
-		int min	  = stats[2];
-		int max   = stats[3];
 		
 		return getSummary(false)
 				+ "\n * Número de respostas: " + quant
@@ -134,9 +130,10 @@ class Survey implements Serializable {
 		
 		if (expand) {
 			int[] stats = getStats();
-			int med = stats[1] / stats[0];
+			int quant = stats[0];
+			int total = stats[1];
 			header += String.format(" - %d respostas - %d horas\n",
-					_answers.size(), med);
+					quant, quant == 0 ? 0 : total / quant);
 		}
 		
 		return header;
@@ -159,18 +156,22 @@ class Survey implements Serializable {
 	}
 	
 	/** State Pattern */
-	private static enum State {
+	enum State {
 		
 		CREATED {
 
 			@Override
 			void open(Survey survey) {
 				survey.setState(OPENED);
+				notifyOpen(survey);
 			}
 
 			@Override
-			void finish(Survey survey) {
-				// TODO
+			void finish(Survey survey) throws SurveyFinishedIdException{
+				throw new SurveyFinishedIdException(
+						survey.getProject().getDiscipline().getName(),
+						survey.getProject().getName()
+						);
 			}
 
 			@Override
@@ -233,12 +234,14 @@ class Survey implements Serializable {
 
 			@Override
 			void finish(Survey survey) {
-				survey.setState(CLOSED);
+				survey.setState(FINISHED);
+				notifyFinish(survey);
 			}
 
 			@Override
 			void cancel(Survey survey) {
 				survey.setState(OPENED);
+				notifyOpen(survey);
 			}
 
 			@Override
@@ -253,11 +256,12 @@ class Survey implements Serializable {
 			@Override
 			void open(Survey survey) {
 				survey.setState(OPENED);
+				notifyOpen(survey);
 			}
 
 			@Override
 			void finish(Survey survey) {
-				/* Already finished */
+				// Already finished
 			}
 
 			@Override
@@ -277,6 +281,20 @@ class Survey implements Serializable {
 			}
 			
 		};
+			
+		void notifyOpen(Survey survey) {
+			Project proj = survey.getProject();
+			Discipline disc = proj.getDiscipline();
+			String msg = String.format("Pode preencher inquérito do projecto %s da disciplina %s", proj.getName(), disc.getName());
+			disc.notifyPersons(msg);
+		}
+		
+		void notifyFinish(Survey survey) {
+			Project proj = survey.getProject();
+			Discipline disc = proj.getDiscipline();
+			String msg = String.format("Resultados do inquérito do projecto %s da disciplina %s", proj.getName(), disc.getName());
+			disc.notifyPersons(msg);
+		}
 		
 		abstract void open(Survey survey)   throws OpeningSurveyIdException;
 		abstract void finish(Survey survey) throws SurveyFinishedIdException;

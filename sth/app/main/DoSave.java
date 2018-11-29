@@ -1,9 +1,9 @@
 package sth.app.main;
 
 import java.io.IOException;
+
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
-
 import sth.core.SchoolManager;
 
 /**

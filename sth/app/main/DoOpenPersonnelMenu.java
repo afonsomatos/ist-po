@@ -2,10 +2,8 @@ package sth.app.main;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Menu;
-
-import sth.core.SchoolManager;
-
 import sth.app.person.PersonnelMenu;
+import sth.core.SchoolManager;
 
 /**
  * 4.1.2. Open personnel menu.

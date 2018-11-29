@@ -2,11 +2,8 @@ package sth.app.teaching;
 
 import pt.tecnico.po.ui.DialogException;
 import sth.core.SchoolManager;
-import sth.core.Submission;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchProjectIdException;
-
-import java.util.Collection;
 
 /**
  * 4.4.3. Show project submissions.

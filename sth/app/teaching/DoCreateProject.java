@@ -1,9 +1,7 @@
 package sth.app.teaching;
 
 import pt.tecnico.po.ui.DialogException;
-
 import sth.app.exception.DuplicateProjectException;
-
 import sth.core.SchoolManager;
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchDisciplineIdException;
