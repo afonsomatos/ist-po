@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
+import sth.core.exception.NoSuchProjectIdException;
 import sth.core.exception.survey.DuplicateSurveyIdException;
 import sth.core.exception.survey.NoSurveyIdException;
 import sth.core.exception.survey.OpeningSurveyIdException;
@@ -79,7 +80,9 @@ public class Project implements Serializable, Comparable<Project> {
 		return _survey;
 	}
 	
-	void addSubmission(Student student, String message) {
+	void addSubmission(Student student, String message) throws NoSuchProjectIdException{
+		if(_closed == true)
+			throw new NoSuchProjectIdException(_name);
 		_submissions.removeIf(s -> s.getStudent() == student);
 		_submissions.add(new Submission(student, message));
 	}
