@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 import sth.core.exception.DuplicateProjectIdException;
 import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSurveyException;
+import sth.core.exception.survey.NoSurveyIdException;
 
 
 /**
@@ -143,7 +143,7 @@ public class Discipline implements Serializable, Comparable<Discipline> {
 		for (Project p : _projects) {
 			try {
 				msg += p.getSurvey().getSummary(true);
-			} catch (NoSurveyException e) {
+			} catch (NoSurveyIdException e) {
 				// don't add
 			}
 		}

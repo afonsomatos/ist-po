@@ -5,13 +5,9 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import sth.core.Survey.Condition;
-import sth.core.exception.ClosingSurveyException;
-import sth.core.exception.DuplicateSurveyException;
-import sth.core.exception.NoSurveyException;
-import sth.core.exception.NonEmptySurveyException;
-import sth.core.exception.OpeningSurveyException;
-import sth.core.exception.SurveyFinishedException;
+import sth.core.exception.survey.DuplicateSurveyIdException;
+import sth.core.exception.survey.NoSurveyIdException;
+import sth.core.exception.survey.OpeningSurveyIdException;
 
 
 /**
@@ -62,61 +58,24 @@ public class Project implements Serializable, Comparable<Project> {
 		return false;
 	}
 	
-	void finishSurvey() throws NoSurveyException, SurveyFinishedException {
-		Survey survey = getSurvey();
-		Condition condition = survey.getCondition();
-		
-		if (condition == Condition.CLOSED)
-			survey.setCondition(Condition.FINISHED);
-		else if (condition != Condition.FINISHED)
-			throw new SurveyFinishedException();
-	}
-
-	void closeSurvey() throws NoSurveyException, ClosingSurveyException {
-		Survey survey = getSurvey();
-		Condition condition = survey.getCondition();
-		
-		if (condition == Condition.OPENED)
-			survey.setCondition(Condition.CLOSED);
-		else if (condition != Condition.CLOSED)
-			throw new ClosingSurveyException();
-	}
-	
-	void openSurvey() throws OpeningSurveyException, NoSurveyException {
-		Survey survey = getSurvey();
-		Condition condition = survey.getCondition();
-		
-		if (condition != Condition.FINISHED && condition != Condition.CREATED)
-			throw new OpeningSurveyException();
-
-		survey.setCondition(Condition.OPENED);
-	}
-	
-	void cancelSurvey() throws NonEmptySurveyException, SurveyFinishedException, NoSurveyException {
-		Survey survey = getSurvey();
-		Condition condition = survey.getCondition();
-		
-		if (condition == Condition.OPENED && !survey.empty())
-			throw new NonEmptySurveyException();
-		
-		if (condition == Condition.FINISHED)
-			throw new SurveyFinishedException();
-		
-		if (condition == Condition.CLOSED)
-			survey.setCondition(Condition.OPENED);
-		else
-			_survey = null;
-	}
-	
-	void createSurvey() throws DuplicateSurveyException {
+	void createSurvey() throws DuplicateSurveyIdException {
 		if (_survey != null)
-			throw new DuplicateSurveyException();
+			throw new DuplicateSurveyIdException(
+					_discipline.getName(),
+					_name);
+		
 		_survey = new Survey(this);
 	}
 	
-	Survey getSurvey() throws NoSurveyException {
+	void setSurvey(Survey survey) {
+		_survey = survey;
+	}
+	
+	Survey getSurvey() throws NoSurveyIdException {
 		if (_survey == null)
-			throw new NoSurveyException();
+			throw new NoSurveyIdException(
+					_discipline.getName(),
+					_name);
 		return _survey;
 	}
 	
@@ -138,7 +97,12 @@ public class Project implements Serializable, Comparable<Project> {
 	 */
 	void close() {
 		if (_survey != null)
-			_survey.setCondition(Condition.OPENED);
+			try {
+				_survey.open();
+			} catch (OpeningSurveyIdException e) {
+				// Ignore
+			}
+		
 		_closed = true;
 	}
 

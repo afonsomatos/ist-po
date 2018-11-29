@@ -30,7 +30,7 @@ public class DoAnswerSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
 		try{
 			_receiver.answerSurvey(_hours.value(),_comment.value(), _discipline.value(), _project.value());
-		} catch(sth.core.exception.NoSurveyException nse){
+		} catch(sth.core.exception.survey.NoSurveyIdException nse){
 			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}

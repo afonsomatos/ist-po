@@ -24,9 +24,9 @@ public class DoOpenSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{
 			_receiver.openSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.NoSurveyException nse) {
+		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.OpeningSurveyException ose){
+		} catch(sth.core.exception.survey.OpeningSurveyIdException ose){
 			throw new OpeningSurveyException(_discipline.value(), _project.value());
 		}
 	}

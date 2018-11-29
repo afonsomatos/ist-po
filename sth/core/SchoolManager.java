@@ -9,18 +9,19 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.List;
 
+import sth.app.exception.DuplicateProjectException;
 import sth.core.exception.BadEntryException;
-import sth.core.exception.ClosingSurveyException;
 import sth.core.exception.DuplicateProjectIdException;
-import sth.core.exception.DuplicateSurveyException;
 import sth.core.exception.ImportFileException;
 import sth.core.exception.NoSuchDisciplineIdException;
 import sth.core.exception.NoSuchPersonIdException;
 import sth.core.exception.NoSuchProjectIdException;
-import sth.core.exception.NoSurveyException;
-import sth.core.exception.NonEmptySurveyException;
-import sth.core.exception.OpeningSurveyException;
-import sth.core.exception.SurveyFinishedException;
+import sth.core.exception.survey.ClosingSurveyIdException;
+import sth.core.exception.survey.DuplicateSurveyIdException;
+import sth.core.exception.survey.NoSurveyIdException;
+import sth.core.exception.survey.NonEmptySurveyIdException;
+import sth.core.exception.survey.OpeningSurveyIdException;
+import sth.core.exception.survey.SurveyFinishedIdException;
 
 
 /**
@@ -197,31 +198,51 @@ public class SchoolManager {
 		return _school.searchPerson(name);
 	}
 	
-	public void answerSurvey(int hours, String message, String discipline, String proj) throws NoSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException {
+	public void answerSurvey(int hours, String message, String discipline, String proj) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException {
 		Student student = (Student) _loggedUser;
 		Survey survey = student.getDiscipline(discipline).getProject(proj).getSurvey();
 		survey.addAnswer(student, message, hours);
 	}
 	
-	public void finishSurvey(String discipline, String project) throws NoSurveyException, SurveyFinishedException, NoSuchProjectIdException, NoSuchDisciplineIdException {
-		((Student) _loggedUser).getDiscipline(discipline).getProject(project).finishSurvey();
+	public void finishSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, SurveyFinishedIdException {
+		((Student) _loggedUser)
+			.getDiscipline(discipline)
+			.getProject(project)
+			.getSurvey()
+			.finish();
 	}
 	
-	public void openSurvey(String discipline, String project) throws NoSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException, OpeningSurveyException {
-		((Student) _loggedUser).getDiscipline(discipline).getProject(project).openSurvey();
+	public void openSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, OpeningSurveyIdException {
+		((Student) _loggedUser)
+			.getDiscipline(discipline)
+			.getProject(project)
+			.getSurvey()
+			.open();
 	}
 	
-	public void closeSurvey(String discipline, String project) throws NoSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException, ClosingSurveyException {
-		((Student) _loggedUser).getDiscipline(discipline).getProject(project).closeSurvey();
+	public void closeSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, ClosingSurveyIdException {
+		((Student) _loggedUser)
+			.getDiscipline(discipline)
+			.getProject(project)
+			.getSurvey()
+			.close();
 	}
 	
-	public void cancelSurvey(String discipline, String project) throws NonEmptySurveyException, SurveyFinishedException, NoSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException {
-		((Student) _loggedUser).getDiscipline(discipline).getProject(project).cancelSurvey();
+	public void cancelSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, SurveyFinishedIdException, NonEmptySurveyIdException {
+		((Student) _loggedUser)
+			.getDiscipline(discipline)
+			.getProject(project)
+			.getSurvey()
+			.cancel();
 	}
 	
-	public void createSurvey(String discipline, String proj) throws DuplicateSurveyException, NoSuchProjectIdException, NoSuchDisciplineIdException {
-		Student student = (Student) _loggedUser;
-		student.getDiscipline(discipline).getProject(proj).createSurvey();
+	public void createSurvey(String discipline, String proj) throws DuplicateSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException {
+		Project project =
+				((Student) _loggedUser)
+					.getDiscipline(discipline)
+					.getProject(proj);
+		
+		project.createSurvey();
 	}
 	
 	public void deliverProject(String content, String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
@@ -233,19 +254,29 @@ public class SchoolManager {
 		return ((Student) _loggedUser).getDiscipline(discipline).getSurveyResults();
 	}
 	
-	public String getSurveyResults(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyException {
-		Discipline d;
-		if (_loggedUser instanceof Teacher) {
-			d = ((Teacher) _loggedUser).getDiscipline(discipline);
-		} else {
-			d = ((Student) _loggedUser).getDiscipline(discipline);
-		}
-		return d.getProject(proj).getSurvey().getResultsFor(_loggedUser);
+	public String getSurveyResults(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyIdException {
+		if (isLoggedUserProfessor())
+			return ((Teacher) _loggedUser)
+					.getDiscipline(discipline)
+					.getProject(proj)
+					.getSurvey()
+					.getResultsForTeacher();
+			
+		else
+			return ((Student) _loggedUser)
+					.getDiscipline(discipline)
+					.getProject(proj)
+					.getSurvey()
+					.getResultsForStudent();
 	}
 	
-	public Collection<Submission> getProjectSubmissions(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
+	public String showProjectSubmissions(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
 		Teacher teacher = (Teacher) _loggedUser;
-		return teacher.getDiscipline(discipline).getProject(proj).getSubmissions();
+		Collection<Submission> projectSubmissions = teacher.getDiscipline(discipline).getProject(proj).getSubmissions();
+		String res = discipline + " - " + proj;
+		for(Submission s : projectSubmissions)
+			res += "\n" + "* " + s;
+		return res;
 	}
 	
 }

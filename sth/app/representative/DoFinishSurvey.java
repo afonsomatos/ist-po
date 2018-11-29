@@ -24,9 +24,9 @@ public class DoFinishSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws DialogException, NoSuchDisciplineIdException, NoSuchProjectIdException {
 		try{
 			_receiver.finishSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.NoSurveyException nse) {
+		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.SurveyFinishedException fse) {
+		} catch(sth.core.exception.survey.SurveyFinishedIdException fse) {
 			throw new FinishingSurveyException(_discipline.value(), _project.value());
 		}
 	}

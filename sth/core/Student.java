@@ -25,7 +25,6 @@ public class Student extends Person {
 	private Course _course;
 
 	
-
 	/**
 	 * Student constructor.
 

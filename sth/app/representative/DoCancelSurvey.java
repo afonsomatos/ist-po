@@ -25,11 +25,11 @@ public class DoCancelSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
 		try{
 			_receiver.cancelSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.NoSurveyException nse) {
+		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.NonEmptySurveyException nese) {
+		} catch(sth.core.exception.survey.NonEmptySurveyIdException nese) {
 			throw new NonEmptySurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.SurveyFinishedException sfe) {
+		} catch(sth.core.exception.survey.SurveyFinishedIdException sfe) {
 			throw new SurveyFinishedException(_discipline.value(), _project.value());
 		}
 	}

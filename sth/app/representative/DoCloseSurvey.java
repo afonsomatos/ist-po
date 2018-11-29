@@ -23,9 +23,9 @@ public class DoCloseSurvey extends sth.app.common.ProjectCommand {
 	public final void myExecute() throws NoSuchProjectIdException, NoSuchDisciplineIdException, DialogException {
 		try{
 			_receiver.closeSurvey(_discipline.value(), _project.value());
-		} catch(sth.core.exception.NoSurveyException nse) {
+		} catch(sth.core.exception.survey.NoSurveyIdException nse) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch(sth.core.exception.ClosingSurveyException cse) {
+		} catch(sth.core.exception.survey.ClosingSurveyIdException cse) {
 			throw new ClosingSurveyException(_discipline.value(), _project.value());
 		}
 	}

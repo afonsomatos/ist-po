@@ -1,13 +1,15 @@
 package sth.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import sth.core.exception.BadEntryException;
 
 
-	/**
-	 * Person implementation.
-	 */
+/**
+ * Person implementation.
+ */
 public abstract class Person implements Serializable, Comparable<Person> {
 	
 	/** Serial number for serialization */
@@ -21,6 +23,9 @@ public abstract class Person implements Serializable, Comparable<Person> {
 
 	/** Person's phone number*/
 	private int _phoneNumber;
+	
+	/** Inbox messages */
+	private List<String> _inbox = new ArrayList<>();
 
 	/**
 	 * Person constructor.
@@ -80,7 +85,7 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	public String toString() {
 		return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name);
 	}
-
+	
 	/**
 	 * Parses the context of a person
 
