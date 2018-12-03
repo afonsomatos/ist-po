@@ -107,8 +107,7 @@ public class School implements java.io.Serializable {
 	Collection<Person> searchPerson(String name) {
 		return _persons.values()
 				.stream()
-				.filter(p -> p.getName()
-				.contains(name))
+				.filter(p -> p.getName().contains(name))
 				.sorted((a, b) -> a.getName().compareTo(b.getName()))
 				.collect(Collectors.toList());
 	}

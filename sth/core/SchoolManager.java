@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import sth.app.exception.DuplicateProjectException;
 import sth.core.exception.BadEntryException;
@@ -64,8 +65,9 @@ public class SchoolManager {
 	/**
 	 * @return the logged user
 	 */
-	public Person getLoggedUser(){
-		return _loggedUser;
+	
+	public String showUser() {
+		return _loggedUser.toString();
 	}
 
 	/**
@@ -102,9 +104,13 @@ public class SchoolManager {
 	 * @return Collection of students of the given discipline
 	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
 	 */	
-	public Collection<Student> showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
+	public String showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
 		Teacher teacher  = (Teacher) _loggedUser;
-		return teacher.getStudentsOfDiscipline(name);
+		return String.join("\n",
+				teacher.getStudentsOfDiscipline(name)
+					.stream()
+					.map(Person::toString)
+					.collect(Collectors.toList()));
 	}
 	
 	/**
@@ -176,10 +182,13 @@ public class SchoolManager {
 	/**
 	 * @return all the people of the school
 	 */
-	public List<Person> getAllUsers() {
-		return _school.getAllUsers();
+	public String showAllUsers() {
+		return String.join("\n",
+				_school.getAllUsers()
+					.stream()
+					.map(Person::toString)
+					.collect(Collectors.toList()));
 	}
-
 
 	/**
 	 * Sets the logged user phone number
@@ -194,8 +203,12 @@ public class SchoolManager {
 	 * @param name
 	 * @return all the people of the school whose name contains the given name
 	 */
-	public Collection<Person> searchPerson(String name) {
-		return _school.searchPerson(name);
+	public String searchPerson(String name) {
+		return String.join("\n",
+				_school.searchPerson(name)
+					.stream()
+					.map(Person::toString)
+					.collect(Collectors.toList()));
 	}
 	
 	public void answerSurvey(int hours, String message, String discipline, String proj) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException {

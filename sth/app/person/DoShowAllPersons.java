@@ -1,9 +1,6 @@
 package sth.app.person;
 
-import java.util.Collection;
-
 import pt.tecnico.po.ui.Command;
-import sth.core.Person;
 import sth.core.SchoolManager;
 
 /**
@@ -23,11 +20,7 @@ public class DoShowAllPersons extends Command<SchoolManager> {
 		@Override
 		public final void execute() {
 
-			Collection<Person> users = _receiver.getAllUsers();
-			
-			for(Person user : users)
-				_display.addLine(user.toString());
-
+			_display.addLine(_receiver.showAllUsers());
 			_display.display();
 		}
 

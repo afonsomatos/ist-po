@@ -19,7 +19,7 @@ public class DoShowPerson extends Command<SchoolManager> {
 	@Override
 	public final void execute() {
 
-		_display.addLine(_receiver.getLoggedUser().toString());
+		_display.addLine(_receiver.showUser());
 		_display.display();
 		
 	}

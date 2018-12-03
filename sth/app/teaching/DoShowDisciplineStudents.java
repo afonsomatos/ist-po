@@ -32,11 +32,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		_form.parse();
 		
 		try {
-			Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
-		
-			for(Student student : students)
-				_display.addLine(student.toString());
-
+			_display.addLine(_receiver.showDisciplineStudents(_discipline.value()));
 			_display.display();
 			
 		} catch (NoSuchDisciplineIdException nsd) {
