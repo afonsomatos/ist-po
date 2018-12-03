@@ -91,11 +91,15 @@ class Survey implements Serializable {
 		int min	  = stats[2];
 		int max   = stats[3];
 		
-		return getSummary(false)
-				+ "\n * Número de submissões: " + _project.getSubmissions().size()
-				+ "\n * Número de respostas: " + quant
-				+ "\n * Tempos de resolução (horas) (mínimo, médio, máximo): " +
+		String res = getSummary(false);
+		
+		if (_state == State.FINISHED)
+			res += 	"\n * Número de submissões: " + _project.getSubmissions().size()
+				+ 	"\n * Número de respostas: " + quant
+				+ 	"\n * Tempos de resolução (horas) (mínimo, médio, máximo): " +
 					String.format("%d, %d, %d", min, (quant==0?0:total/quant), max);
+		
+		return res;
 	}
 	
 	String getResultsForStudent() {
@@ -104,22 +108,21 @@ class Survey implements Serializable {
 		int quant = stats[0];
 		int total = stats[1];
 		
-		return getSummary(false)
-				+ "\n * Número de respostas: " + quant
-				+ "\n * Tempo médio (horas): " + total / quant;
+		String res = getSummary(false);
+		
+		if (_state == State.FINISHED)
+			res +=	"\n * Número de respostas: " + quant
+				+ 	"\n * Tempo médio (horas): " + (quant == 0 ? 0 : total / quant);
+	
+		return res;
 	}
 	
 	String getSummary(boolean expand) {
-		List<State> active = Arrays.asList(
-				State.OPENED,
-				State.CLOSED, 
-				State.CREATED);
-		
 		String header = String.format("%s - %s",
 				_project.getDiscipline().getName(),
 				_project.getName());
 		
-		if (active.contains(_state)) {
+		if (_state != State.FINISHED) {
 			String state = "por abrir";
 			if (_state == State.OPENED)
 				state = "aberto";

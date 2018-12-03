@@ -97,6 +97,9 @@ public class Student extends Person {
 		return _isRepresentative ? "DELEGADO" : "ALUNO";
 	}
 
+	Course getCourse() {
+		return _course;
+	}
 
 	/**
 	 * @return the string that represents the particular information of the student

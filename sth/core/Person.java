@@ -111,7 +111,7 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	/**
 	 * @return string that represents the person
 	 */
-	public String toString() {
+	public final String toString() {
 		return String.format("%s|%d|%d|%s", getLabel(), _id, _phoneNumber, _name) + getDetails();
 	}
 	

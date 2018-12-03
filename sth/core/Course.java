@@ -2,7 +2,10 @@ package sth.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import sth.core.exception.NoSuchDisciplineIdException;
 
 
 /**
@@ -34,6 +37,15 @@ public class Course implements Serializable {
 		_name = name;
 	}
 
+	Discipline getDiscipline(String name) throws NoSuchDisciplineIdException {
+		for (Discipline d : _disciplines) {
+			if (d.getName().equals(name))
+				return d;
+		}
+		throw new NoSuchDisciplineIdException(name);
+	}
+	
+	
 	/**
 	 * Adds a student to the course.
 
@@ -95,6 +107,10 @@ public class Course implements Serializable {
 		Discipline x = new Discipline(header, this);
 		_disciplines.add(x);
 		return x;
+	}
+	
+	Collection<Student> getRepresentatives() {
+		return _representatives;
 	}
 
 }

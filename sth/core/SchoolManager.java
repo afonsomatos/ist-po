@@ -206,6 +206,7 @@ public class SchoolManager {
 	
 	public void finishSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, SurveyFinishedIdException {
 		((Student) _loggedUser)
+			.getCourse()
 			.getDiscipline(discipline)
 			.getProject(project)
 			.getSurvey()
@@ -214,6 +215,7 @@ public class SchoolManager {
 	
 	public void openSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, OpeningSurveyIdException {
 		((Student) _loggedUser)
+			.getCourse()
 			.getDiscipline(discipline)
 			.getProject(project)
 			.getSurvey()
@@ -222,6 +224,7 @@ public class SchoolManager {
 	
 	public void closeSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, ClosingSurveyIdException {
 		((Student) _loggedUser)
+			.getCourse()
 			.getDiscipline(discipline)
 			.getProject(project)
 			.getSurvey()
@@ -230,6 +233,7 @@ public class SchoolManager {
 	
 	public void cancelSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, SurveyFinishedIdException, NonEmptySurveyIdException {
 		((Student) _loggedUser)
+			.getCourse()
 			.getDiscipline(discipline)
 			.getProject(project)
 			.getSurvey()
@@ -239,6 +243,7 @@ public class SchoolManager {
 	public void createSurvey(String discipline, String proj) throws DuplicateSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException {
 		Project project =
 				((Student) _loggedUser)
+					.getCourse()
 					.getDiscipline(discipline)
 					.getProject(proj);
 		
@@ -251,7 +256,7 @@ public class SchoolManager {
 	}
 
 	public String getDisciplineSurveyResults(String discipline) throws NoSuchDisciplineIdException {
-		return ((Student) _loggedUser).getDiscipline(discipline).getSurveyResults();
+		return ((Student) _loggedUser).getCourse().getDiscipline(discipline).getSurveyResults();
 	}
 	
 	public String getSurveyResults(String discipline, String proj) throws NoSuchProjectIdException, NoSuchDisciplineIdException, NoSurveyIdException {

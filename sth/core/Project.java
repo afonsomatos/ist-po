@@ -59,7 +59,10 @@ public class Project implements Serializable, Comparable<Project> {
 		return false;
 	}
 	
-	void createSurvey() throws DuplicateSurveyIdException {
+	void createSurvey() throws DuplicateSurveyIdException, NoSuchProjectIdException {
+		if (_closed)
+			throw new NoSuchProjectIdException(_name);
+		
 		if (_survey != null)
 			throw new DuplicateSurveyIdException(
 					_discipline.getName(),
@@ -104,6 +107,7 @@ public class Project implements Serializable, Comparable<Project> {
 				_survey.open();
 			} catch (OpeningSurveyIdException e) {
 				// Never thrown, created survey always opens
+				e.printStackTrace();
 			}
 		_closed = true;
 	}

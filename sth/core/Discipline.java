@@ -3,6 +3,7 @@ package sth.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -152,7 +153,9 @@ public class Discipline implements Serializable, Comparable<Discipline> {
 	}
 	
 	void notifyPersons(String message) {
-		for (Student s : _students)
+		Set<Student> students = new HashSet<>(_students);
+		students.addAll(_course.getRepresentatives());
+		for (Student s : students)
 			s.notify(this, message);
 		for (Teacher t : _teachers)
 			t.notify(this, message);
