@@ -61,6 +61,7 @@ class Survey implements Serializable {
 			if(_state == State.OPENED){
 				_answers.add(new Answer(message, hours));
 				_students.add(student);
+				return;
 			}
 		}
 		throw new NoSurveyIdException(_project.getDiscipline().getName(), _project.getName());
