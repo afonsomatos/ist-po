@@ -58,13 +58,13 @@ class Survey implements Serializable {
 			throw new NoSuchProjectIdException(_project.getName());
 		
 		if (!_students.contains(student)) {
-			if(_state == State.OPENED){
-				_answers.add(new Answer(message, hours));
-				_students.add(student);
-				return;
-			}
+			
+			if (_state != State.OPENED)
+				throw new NoSurveyIdException(_project.getDiscipline().getName(), _project.getName());
+				
+			_answers.add(new Answer(message, hours));
+			_students.add(student);
 		}
-		throw new NoSurveyIdException(_project.getDiscipline().getName(), _project.getName());
 	}
 	
 	/**

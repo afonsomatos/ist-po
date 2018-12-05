@@ -212,9 +212,11 @@ public class SchoolManager {
 	}
 	
 	public void answerSurvey(int hours, String message, String discipline, String proj) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException {
-		Student student = (Student) _loggedUser;
-		Survey survey = student.getDiscipline(discipline).getProject(proj).getSurvey();
-		survey.addAnswer(student, message, hours);
+		((Student) _loggedUser)
+			.getDiscipline(discipline)
+			.getProject(proj)
+			.getSurvey()
+			.addAnswer((Student) _loggedUser, message, hours);
 	}
 	
 	public void finishSurvey(String discipline, String project) throws NoSurveyIdException, NoSuchProjectIdException, NoSuchDisciplineIdException, SurveyFinishedIdException {
