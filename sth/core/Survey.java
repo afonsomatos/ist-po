@@ -12,6 +12,7 @@ import sth.core.exception.survey.ClosingSurveyIdException;
 import sth.core.exception.survey.NonEmptySurveyIdException;
 import sth.core.exception.survey.OpeningSurveyIdException;
 import sth.core.exception.survey.SurveyFinishedIdException;
+import sth.core.exception.survey.NoSurveyIdException;
 
 class Survey implements Serializable {
 	
@@ -52,15 +53,17 @@ class Survey implements Serializable {
 		return _answers.size() == 0;
 	}
 	
-	void addAnswer(Student student, String message, int hours) throws NoSuchProjectIdException {
+	void addAnswer(Student student, String message, int hours) throws NoSuchProjectIdException, NoSurveyIdException {
 		if (!_project.studentSubmited(student))
 			throw new NoSuchProjectIdException(_project.getName());
 		
 		if (!_students.contains(student)) {
-			_answers.add(new Answer(message, hours));
-			_students.add(student);
+			if(_state == State.OPENED){
+				_answers.add(new Answer(message, hours));
+				_students.add(student);
+			}
 		}
-		
+		else throw new NoSurveyIdException(_project.getDiscipline().getName(), _project.getName());
 	}
 	
 	/**
