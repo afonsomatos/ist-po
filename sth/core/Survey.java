@@ -58,9 +58,7 @@ class Survey implements Serializable {
 			throw new NoSuchProjectIdException(_project.getName());
 		
 		if (!_students.contains(student)) {
-			System.out.println(_state);
 			if(_state == State.OPENED){
-				System.out.println(_state);
 				_answers.add(new Answer(message, hours));
 				_students.add(student);
 			}
