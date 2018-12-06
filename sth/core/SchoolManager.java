@@ -105,9 +105,8 @@ public class SchoolManager {
 	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
 	 */	
 	public String showDisciplineStudents(String name) throws NoSuchDisciplineIdException {
-		Teacher teacher  = (Teacher) _loggedUser;
 		return String.join("\n",
-				teacher.getStudentsOfDiscipline(name)
+				((Teacher) _loggedUser).getStudentsOfDiscipline(name)
 					.stream()
 					.map(Person::toString)
 					.collect(Collectors.toList()));
@@ -121,8 +120,7 @@ public class SchoolManager {
 	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
 	 */
 	public void closeProject(String discipline, String name) throws NoSuchProjectIdException, NoSuchDisciplineIdException {
-		Teacher teacher = (Teacher) _loggedUser;
-		teacher.getDiscipline(discipline).getProject(name).close();
+		((Teacher) _loggedUser).getDiscipline(discipline).getProject(name).close();
 	}
 	
 	/**
@@ -134,8 +132,7 @@ public class SchoolManager {
 	 * @throws NoSuchDisciplineIdException if the given discipline isn't valid
 	 */
 	public void createProject(String discipline, String name) throws DuplicateProjectIdException, NoSuchDisciplineIdException {
-		Teacher teacher = (Teacher) _loggedUser;
-		teacher.createProject(discipline, name);
+		((Teacher) _loggedUser).createProject(discipline, name);
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import sth.core.exception.BadEntryException;
 
@@ -28,7 +29,7 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	private int _phoneNumber;
 	
 	/** Inbox messages */
-	private List<String> _inbox = new ArrayList<String>();
+	private List<Notification> _inbox = new ArrayList<Notification>();
 	
 	/** Don't receive messages from these disciplines */
 	private Set<Discipline> _inboxBlocks = new HashSet<>();
@@ -47,9 +48,11 @@ public abstract class Person implements Serializable, Comparable<Person> {
 	}
 
 	Collection<String> readInbox() {
-		Collection<String> all = new ArrayList<>(_inbox);
+		Collection<Notification> all = new ArrayList<>(_inbox);
 		_inbox.clear();
-		return all;
+		return all.stream()
+				.map(Notification::getMessage)
+				.collect(Collectors.toList());
 	}
 	
 	void unblock(Discipline discipline) {
@@ -60,9 +63,9 @@ public abstract class Person implements Serializable, Comparable<Person> {
 		_inboxBlocks.add(discipline);
 	}
 	
-	void notify(Discipline discipline, String message) {
-		if (!_inboxBlocks.contains(discipline))
-			_inbox.add(message);
+	void notify(Notification notification) {
+		if (!_inboxBlocks.contains(notification.getDiscipline()))
+			_inbox.add(notification);
 	}
 	
 	/**

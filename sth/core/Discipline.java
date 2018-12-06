@@ -153,12 +153,13 @@ public class Discipline implements Serializable, Comparable<Discipline> {
 	}
 	
 	void notifyPersons(String message) {
+		Notification not = new Notification(this, message);
 		Set<Student> students = new HashSet<>(_students);
 		students.addAll(_course.getRepresentatives());
 		for (Student s : students)
-			s.notify(this, message);
+			s.notify(not);
 		for (Teacher t : _teachers)
-			t.notify(this, message);
+			t.notify(not);
 	}
 	
 }
