@@ -66,6 +66,8 @@ public class Course implements Serializable {
 				return;
 			_representatives.add(student);
 			addStudent(student);
+			for (Discipline d : _disciplines)
+				d.attach(student);
 		}
 	}
 
@@ -106,6 +108,8 @@ public class Course implements Serializable {
 		}
 		Discipline x = new Discipline(header, this);
 		_disciplines.add(x);
+		for (Student s : _representatives)
+			x.attach(s);
 		return x;
 	}
 	

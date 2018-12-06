@@ -293,14 +293,14 @@ class Survey implements Serializable {
 			Project proj = survey.getProject();
 			Discipline disc = proj.getDiscipline();
 			String msg = String.format("Pode preencher inquérito do projecto %s da disciplina %s", proj.getName(), disc.getName());
-			disc.notifyPersons(msg);
+			disc.notifyObservers(new Notification(msg));
 		}
 		
 		void notifyFinish(Survey survey) {
 			Project proj = survey.getProject();
 			Discipline disc = proj.getDiscipline();
 			String msg = String.format("Resultados do inquérito do projecto %s da disciplina %s", proj.getName(), disc.getName());
-			disc.notifyPersons(msg);
+			disc.notifyObservers(new Notification(msg));
 		}
 		
 		abstract void open(Survey survey)   throws OpeningSurveyIdException;

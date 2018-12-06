@@ -75,7 +75,7 @@ public class Student extends Person {
 		if (_course == null)
 			_course = school.parseCourse(components[0]);
 		
-		if (_isRepresentative)
+		if (_isRepresentative) 
 			_course.addRepresentative(this);
 		else 
 			_course.addStudent(this);
